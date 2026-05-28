@@ -8,8 +8,6 @@
 <title>🐸 FrogNutri - Bột Dinh Dưỡng Ếch</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="public/assets/css/mobile.css">
-
 <style>
 /* ====== THEME & GLOBAL ====== */
 :root {
@@ -647,12 +645,10 @@ th {
 
 /* ====== MOBILE OPTIMIZATION ====== */
 @media (max-width: 480px) {
-  /* Body Layout */
   body {
     flex-direction: column;
   }
 
-  /* Sidebar & Main */
   .sidebar {
     width: 100%;
     height: auto;
@@ -723,7 +719,6 @@ th {
     width: 100%;
   }
 
-  /* Typography */
   .topbar {
     flex-direction: column;
     gap: 12px;
@@ -740,7 +735,6 @@ th {
     font-size: 13px;
   }
 
-  /* Grid & Cards */
   .grid {
     grid-template-columns: 1fr;
     gap: 15px;
@@ -765,7 +759,6 @@ th {
     margin-bottom: 10px;
   }
 
-  /* Forms & Input */
   input, textarea, select {
     padding: 11px;
     font-size: 16px;
@@ -777,7 +770,6 @@ th {
     min-height: 44px;
   }
 
-  /* Auth Card */
   .auth-card {
     width: 100%;
     margin: 60px 0 20px 0;
@@ -806,7 +798,6 @@ th {
     font-size: 16px;
   }
 
-  /* Profile */
   .profile-wrap {
     flex-direction: column;
     gap: 20px;
@@ -818,7 +809,6 @@ th {
     height: 120px;
   }
 
-  /* Chat */
   .chat-wrap {
     height: calc(100vh - 250px);
   }
@@ -865,7 +855,6 @@ th {
     padding-bottom: 8px;
   }
 
-  /* Table */
   table {
     font-size: 12px;
   }
@@ -874,13 +863,11 @@ th {
     padding: 8px 6px;
   }
 
-  /* Badge */
   .badge {
     font-size: 11px;
     padding: 4px 10px;
   }
 
-  /* Report Section */
   .report-grid {
     grid-template-columns: 1fr;
     gap: 12px;
@@ -906,7 +893,6 @@ th {
     font-size: 13px;
   }
 
-  /* Calculator */
   #res-box {
     padding: 16px !important;
   }
@@ -961,11 +947,6 @@ th {
   .report-grid {
     grid-template-columns: 1fr;
   }
-}
-
-body.dark {
-  --bg: #0f1a13;
-  --card: #1e2b24cc;
 }
 </style>
 </head>
@@ -1293,13 +1274,13 @@ body.dark {
       <div class="chat-box">
         <div class="messages" id="messages">
           <div class="msg bot">
-            Xin chào 👋 Tôi là FrogNutri AI. Hỏi tôi về: cách dùng, trẻ mấy tháng, protein, canxi, gym, bảo quản...
+            Xin chào 👋 Tôi là FrogNutri AI. Hỏi tôi về: tổ chức, tác giả, lý do chọn đề tài, quy trình, kiểm nghiệm, QR, hướng dẫn sử dụng...
           </div>
         </div>
 
         <div class="typing" id="typing"></div>
 
-        <div class="chat-hint">Bạn có thể hỏi: cách dùng, trẻ mấy tháng, giá sản phẩm, ai làm, protein, canxi, gym, bảo quản, thành phần...</div>
+        <div class="chat-hint">Bạn có thể hỏi: tổ chức, tác giả, lý do chọn đề tài, quy trình sản xuất, kiểm nghiệm, QR, hướng dẫn sử dụng, muỗng định lượng...</div>
 
         <div class="input-area">
           <input id="chat-input" type="text" placeholder="Nhập câu hỏi...">
@@ -1346,32 +1327,21 @@ body.dark {
 </main>
 
 <script>
-// ====== STATE & DATA ======
 let currentUser = null;
 let currentPage = 'login';
 const users = [
   { id: 1, name: 'Demo User', email: 'demo@example.com', password: '123456' }
 ];
 
-// ====== NAVIGATION ======
 function showPage(page) {
-  // Hide all pages
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  
-  // Check if user is logged in for protected pages
   if (['dashboard', 'about', 'calculator', 'nutrition', 'chatbot', 'profile'].includes(page) && !currentUser) {
     showPage('login');
     return;
   }
-
-  // Show selected page
   document.getElementById('page-' + page).classList.add('active');
   currentPage = page;
-
-  // Update menu
   document.querySelectorAll('.sidebar a').forEach(a => a.classList.remove('active'));
-  
-  // Hide/Show menu items based on auth
   const menuItems = {
     'menu-dashboard': ['dashboard', 'about', 'calculator', 'nutrition', 'chatbot', 'profile', 'logout'],
     'menu-about': ['dashboard', 'about', 'calculator', 'nutrition', 'chatbot', 'profile', 'logout'],
@@ -1395,18 +1365,15 @@ function showPage(page) {
     });
   }
 
-  // Close mobile menu
   document.getElementById('hamburger').classList.remove('active');
   document.getElementById('sidebarNav').classList.remove('active');
 
-  // Load page data
   if (page === 'profile' && currentUser) {
     document.getElementById('profile-name').value = currentUser.name;
     document.getElementById('profile-email').value = currentUser.email;
   }
 }
 
-// ====== MOBILE MENU ======
 function toggleMenu() {
   const hamburger = document.getElementById('hamburger');
   const sidebarNav = document.getElementById('sidebarNav');
@@ -1414,19 +1381,15 @@ function toggleMenu() {
   sidebarNav.classList.toggle('active');
 }
 
-// ====== AUTHENTICATION ======
 function handleLogin(e) {
   e.preventDefault();
   const email = document.getElementById('login-email').value;
   const password = document.getElementById('login-pass').value;
-
   const user = users.find(u => u.email === email && u.password === password);
-
   if (user) {
     currentUser = user;
     document.getElementById('login-msg').className = 'msg-box success';
     document.getElementById('login-msg').textContent = '✅ Đăng nhập thành công!';
-    
     setTimeout(() => {
       showPage('dashboard');
       document.getElementById('login-email').value = '';
@@ -1444,23 +1407,19 @@ function handleRegister(e) {
   const name = document.getElementById('register-name').value;
   const email = document.getElementById('register-email').value;
   const password = document.getElementById('register-pass').value;
-
   if (users.find(u => u.email === email)) {
     document.getElementById('register-msg').className = 'msg-box error';
     document.getElementById('register-msg').textContent = '❌ Email đã tồn tại!';
     return;
   }
-
   users.push({
     id: users.length + 1,
     name,
     email,
     password
   });
-
   document.getElementById('register-msg').className = 'msg-box success';
   document.getElementById('register-msg').textContent = '✅ Đăng ký thành công! Chuyển sang đăng nhập...';
-
   setTimeout(() => {
     document.getElementById('register-name').value = '';
     document.getElementById('register-email').value = '';
@@ -1474,29 +1433,24 @@ function logout() {
   showPage('login');
 }
 
-// ====== PASSWORD TOGGLE ======
 function togglePassword(id) {
   const input = document.getElementById(id);
   input.type = input.type === 'password' ? 'text' : 'password';
 }
 
-// ====== THEME ======
 function toggleTheme() {
   document.body.classList.toggle('dark');
   localStorage.theme = document.body.classList.contains('dark') ? 'dark' : 'light';
 }
 
-// Load theme preference
 if (localStorage.theme === 'dark') {
   document.body.classList.add('dark');
 }
 
-// ====== CALCULATOR ======
 function calculate() {
   const rate = parseFloat(document.getElementById('calc-type').value);
   const gram = parseFloat(document.getElementById('calc-gram').value);
   const resBox = document.getElementById('res-box');
-  
   if (gram > 0) {
     resBox.style.display = 'block';
     document.getElementById('protein-res').innerText = (rate * gram).toFixed(2);
@@ -1505,52 +1459,78 @@ function calculate() {
   }
 }
 
-// ====== CHATBOT ======
 const chatbotQA = [
-  { keywords: ["giá", "bao nhiêu", "tiền", "chi phí"], answer: "Bột thân ếch có giá 22.500đ/túi 250g. Bột đùi ếch cao cấp hơn có giá 39.500đ/túi 250g." },
-  { keywords: ["ai", "tác giả", "nhóm", "thực hiện"], answer: "Nhóm tác giả gồm: Nguyễn Anh Thơ, Võ Huỳnh Uyên Nhi, Hà Hoàng Thiện (Lớp 9)." },
-  { keywords: ["đạm", "protein", "canxi", "dinh dưỡng", "chỉ số"], answer: "Sản phẩm đạt hàm lượng Protein ấn tượng ~58%. Đặc biệt, bột thân ếch chứa tới 5676mg Canxi mỗi 100g nhờ tận dụng xương đùi nghiền mịn." },
-  { keywords: ["quy trình", "cách làm", "sản xuất", "luộc", "sấy"], answer: "Gồm 4 bước: 1. Sơ chế sạch -> 2. Luộc tách xương -> 3. Sấy & Nghiền tạo bột -> 4. Đóng gói túi Kraft bảo vệ môi trường." },
-  { keywords: ["đối tượng", "trẻ em", "gym", "ăn kiêng"], answer: "Sản phẩm lý tưởng cho trẻ nhỏ phát triển chiều cao, người tập thể hình cần đạm và người ăn kiêng cần thực phẩm ít béo." },
-  { keywords: ["bao bì", "qr", "website", "thông tin"], answer: "Bao bì là túi zip giấy kraft thân thiện môi trường, có nhãn thông tin, ngày sản xuất, hạn sử dụng và mã QR dẫn đến website FrogNutri." },
-  { keywords: ["bé", "trẻ", "mấy tháng", "bao nhiêu tháng"], answer: "Trẻ từ 6 tháng tuổi trở lên có thể dùng. Nên bắt đầu lượng nhỏ trộn cháo/súp." },
-  { keywords: ["cách dùng", "ăn sao", "dùng như thế nào"], answer: "Có thể trộn cháo, cơm, mì, súp, salad hoặc ăn trực tiếp như snack." }
+  {
+    keywords: ["tổ chức", "cơ quan chủ quản", "ủy ban nhân dân", "đơn vị thực hiện", "tác giả", "giáo viên hướng dẫn", "lĩnh vực", "thời gian hoàn thành"],
+    answer: "Dự án do Ủy ban nhân dân Phường Tân Ngãi, tỉnh Vĩnh Long chỉ đạo, thực hiện bởi Trường THCS Nguyễn Đình Chiểu. Nhóm tác giả lớp 9/1 gồm Hà Hoàng Thiện (40%), Nguyễn Anh Thơ (40%), Võ Huỳnh Uyên Nhi (20%) dưới sự hướng dẫn của Thầy Đỗ Hữu Thịnh. Lĩnh vực dự thi là giải pháp ứng phó biến đổi khí hậu, bảo vệ môi trường và phát triển kinh tế."
+  },
+  {
+    keywords: ["lý do", "chọn đề tài", "cấp thiết", "suy dinh dưỡng", "còi xương", "loãng xương", "nông thôn", "thực phẩm phụ phẩm", "bột cóc"],
+    answer: "FrogNutri giải quyết thiếu hụt đạm cao và canxi hữu cơ ở nông thôn, tận dụng thân ếch phụ phẩm giá rẻ và tránh lãng phí. Đồng thời sản phẩm thay thế bột cóc độc hại, bảo vệ đa dạng sinh học và an toàn cho trẻ em."
+  },
+  {
+    keywords: ["quy trình", "sản xuất", "chế biến", "hấp cách thủy", "sấy", "nghiền", "phối trộn", "thảo mộc", "sả", "gừng", "quế"],
+    answer: "Quy trình FrogNutri gồm: sơ chế sạch thân ếch, hấp cách thủy để giữ dinh dưỡng, sấy ở 70°C, nghiền siêu mịn cả thịt lẫn xương, rồi phối trộn với sả, gừng và vỏ quế để giảm mùi tanh và cân bằng tiêu hóa."
+  },
+  {
+    keywords: ["mới", "sáng tạo", "kinh tế tuần hoàn", "bảo vệ hệ sinh thái", "an toàn sinh học", "qr", "web app", "ứng dụng số"],
+    answer: "FrogNutri là giải pháp kinh tế tuần hoàn: dùng thân ếch phụ phẩm để tạo ra bột giàu dinh dưỡng, thay thế bột cóc, bảo vệ môi trường và tích hợp QR + Web App để minh bạch nguồn gốc và cá nhân hóa dinh dưỡng."
+  },
+  {
+    keywords: ["kiểm nghiệm", "độ ẩm", "protein", "canxi", "chất béo", "hàm lượng"],
+    answer: "Sản phẩm đạt kiểm nghiệm: độ ẩm 4,57%, protein 57,4%, canxi hữu cơ 5676 mg/100g, chất béo 16,8%. Đây là bột dinh dưỡng an toàn, ít ẩm và dễ bảo quản, phù hợp cho trẻ em và người cao tuổi."
+  },
+  {
+    keywords: ["hướng dẫn", "sử dụng", "tiện ích", "muỗng", "định lượng", "ẩm thực", "trộn"],
+    answer: "Bột FrogNutri dùng trộn vào cháo, súp, bột ăn dặm hoặc gia vị bổ sung. Trong mỗi túi tặng kèm muỗng nhỏ 5g cho trẻ em và muỗng lớn 10g cho người lớn, giúp đong chính xác mà không cần cân."
+  },
+  {
+    keywords: ["tài liệu tham khảo", "chiến lược quốc gia", "bộ y tế", "y học", "studocu", "an toàn vệ sinh"],
+    answer: "Tài liệu tham khảo gồm Quyết định 02/QĐ-TTg về dinh dưỡng 2021–2030, Thông tư 11/VBHN-BYT về an toàn thực phẩm bổ sung, và nghiên cứu dinh dưỡng lâm sàng về vai trò protein & canxi cho hệ cơ xương khớp trẻ em."
+  },
+  {
+    keywords: ["giá", "bao nhiêu", "tiền", "chi phí"],
+    answer: "Bột thân ếch có giá 22.500đ/túi 250g. Bột đùi ếch cao cấp hơn có giá 39.500đ/túi 250g."
+  },
+  {
+    keywords: ["ai", "tác giả", "nhóm", "thực hiện"],
+    answer: "Nhóm tác giả gồm: Nguyễn Anh Thơ, Võ Huỳnh Uyên Nhi, Hà Hoàng Thiện (Lớp 9), thực hiện cùng giáo viên hướng dẫn Thầy Đỗ Hữu Thịnh."
+  },
+  {
+    keywords: ["đạm", "protein", "canxi", "dinh dưỡng", "chỉ số"],
+    answer: "Sản phẩm đạt hàm lượng protein 57,4% và canxi nguyên phần 5676mg/100g vì nghiền cả thân và xương, giúp bổ sung đạm và canxi dễ hấp thu."
+  },
+  {
+    keywords: ["cách dùng", "ăn sao", "dùng như thế nào"],
+    answer: "Có thể trộn vào cháo, cơm, mì, súp, salad hoặc dùng trực tiếp như snack."
+  }
 ];
 
 function getChatbotReply(q) {
-  q = q.toLowerCase().trim();
-  
-  if (!q) return "Bạn có thể hỏi về giá, dinh dưỡng, quy trình, đối tượng hoặc nhóm tác giả nhé!";
-  
+  const lower = q.toLowerCase().trim();
+  if (!lower) return "Bạn có thể hỏi về giá, dinh dưỡng, quy trình, đối tượng hoặc tài liệu tham khảo của FrogNutri nhé!";
   for (let item of chatbotQA) {
     for (let keyword of item.keywords) {
-      if (q.includes(keyword)) {
+      if (lower.includes(keyword)) {
         return item.answer;
       }
     }
   }
-  
-  return "Tôi chưa có thông tin cụ thể về vấn đề này. Bạn có thể hỏi về 'giá', 'dinh dưỡng', 'quy trình', 'đối tượng', 'ai làm' hoặc 'cách dùng' nhé!";
+  return "Tôi chưa có thông tin chi tiết cho câu hỏi này. Hãy thử hỏi về 'tổ chức', 'lý do chọn đề tài', 'quy trình', 'kiểm nghiệm', 'QR', 'hướng dẫn sử dụng' hoặc 'tài liệu tham khảo'.";
 }
 
 function sendMessage() {
   const input = document.getElementById('chat-input');
   const q = input.value.trim();
   if (!q) return;
-
   const messagesDiv = document.getElementById('messages');
   const typingDiv = document.getElementById('typing');
-
-  // Add user message
   const userMsg = document.createElement('div');
   userMsg.className = 'msg user';
   userMsg.textContent = q;
   messagesDiv.appendChild(userMsg);
-
   input.value = '';
-
   typingDiv.textContent = 'AI đang trả lời...';
-
   setTimeout(() => {
     typingDiv.textContent = '';
     const botMsg = document.createElement('div');
@@ -1561,26 +1541,21 @@ function sendMessage() {
   }, 600);
 }
 
-// Allow Enter to send message
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('chat-input').addEventListener('keydown', (e) => {
     if (e.key === 'Enter') sendMessage();
   });
 });
 
-// ====== PROFILE ======
 function handleUpdateProfile(e) {
   e.preventDefault();
   const name = document.getElementById('profile-name').value;
   const password = document.getElementById('profile-pass').value;
-
   if (currentUser) {
     currentUser.name = name;
     if (password) currentUser.password = password;
-    
     document.getElementById('profile-msg').className = 'msg-box success';
     document.getElementById('profile-msg').textContent = '✅ Đã lưu thành công';
-    
     setTimeout(() => {
       document.getElementById('profile-msg').textContent = '';
     }, 2000);
