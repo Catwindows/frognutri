@@ -1119,7 +1119,7 @@ th {
       <div class="card" style="text-align: center;">
         <div style="font-size: 32px; margin-bottom: 10px;">💰</div>
         <p style="font-size: 13px; color: var(--text-light); margin-bottom: 8px;">Giá thấp</p>
-        <h3 style="font-size: 24px; color: var(--primary);">50k đ</h3>
+        <h3 style="font-size: 24px; color: var(--primary);">22.5k đ</h3>
       </div>
     </div>
 
@@ -1338,16 +1338,16 @@ th {
       <p style="font-size: 13px; color: #666; margin-bottom: 18px;">Nhấn vào sản phẩm bạn muốn đặt mua</p>
 
       <div class="order-product-grid" id="product-options">
-        <div class="product-option selected" onclick="selectProduct(this, 'Bột thân ếch 100g', '50.000đ')">
+        <div class="product-option selected" onclick="selectProduct(this, 'Bột thân ếch 250g', '22.500đ')">
           <div class="product-emoji">🐸</div>
-          <div class="product-name">Bột thân ếch 100g</div>
-          <div class="product-price">50.000đ / túi</div>
+          <div class="product-name">Bột thân ếch 250g</div>
+          <div class="product-price">22.500đ / túi</div>
           <div class="product-desc">Protein 57.4% • Canxi 5676mg</div>
         </div>
-        <div class="product-option" onclick="selectProduct(this, 'Bột đùi ếch 500g', '39.500đ')">
+        <div class="product-option" onclick="selectProduct(this, 'Bột đùi ếch 250g', '39.500đ')">
           <div class="product-emoji">🦵</div>
-          <div class="product-name">Bột đùi ếch 500g</div>
-          <div class="product-price">75.000đ / túi</div>
+          <div class="product-name">Bột đùi ếch 250g</div>
+          <div class="product-price">39.500đ / túi</div>
           <div class="product-desc">Protein 58.6% • Cao cấp</div>
         </div>
       </div>
@@ -1605,52 +1605,112 @@ function submitOrder() {
 /* ====== CHATBOT ====== */
 const chatbotQA = [
   {
-    keywords: ["tổ chức", "cơ quan chủ quản", "ủy ban nhân dân", "đơn vị thực hiện", "tác giả", "giáo viên hướng dẫn", "lĩnh vực", "thời gian hoàn thành"],
-    answer: "Dự án do Ủy ban nhân dân Phường Tân Ngãi, tỉnh Vĩnh Long chỉ đạo, thực hiện bởi Trường THCS Nguyễn Đình Chiểu. Nhóm tác giả lớp 9/1 gồm Hà Hoàng Thiện (40%), Nguyễn Anh Thơ (40%), Võ Huỳnh Uyên Nhi (20%) dưới sự hướng dẫn của Thầy Đỗ Hữu Thịnh. Lĩnh vực dự thi là giải pháp ứng phó biến đổi khí hậu, bảo vệ môi trường và phát triển kinh tế."
+    keywords: ["frognutri là gì","giới thiệu sản phẩm","sản phẩm là gì"],
+    answer: "FrogNutri là bột dinh dưỡng được chế biến từ thân ếch bằng quy trình hấp cách thủy, sấy nhiệt độ thấp 70°C và nghiền siêu mịn. Sản phẩm tận dụng cả phần thịt và xương ếch nhằm cung cấp đồng thời protein, canxi hữu cơ và các khoáng chất tự nhiên. FrogNutri được nghiên cứu dành cho trẻ em, người cao tuổi, người tập gym, người ăn kiêng và những người cần bổ sung dinh dưỡng hằng ngày."
   },
   {
-    keywords: ["lý do", "chọn đề tài", "cấp thiết", "suy dinh dưỡng", "còi xương", "loãng xương", "nông thôn", "thực phẩm phụ phẩm", "bột cóc"],
-    answer: "FrogNutri giải quyết thiếu hụt đạm cao và canxi hữu cơ ở nông thôn, tận dụng thân ếch phụ phẩm giá rẻ và tránh lãng phí. Đồng thời sản phẩm thay thế bột cóc độc hại, bảo vệ đa dạng sinh học và an toàn cho trẻ em."
+    keywords: ["điểm mới","sáng tạo","khác biệt","ưu điểm","mới","kinh tế tuần hoàn","bảo vệ hệ sinh thái","an toàn sinh học","qr","web app","ứng dụng số"],
+    answer: "Điểm mới nổi bật của FrogNutri là tận dụng thân ếch - phần thường có giá trị kinh tế thấp sau khi tách đùi xuất khẩu - để tạo ra sản phẩm dinh dưỡng giá trị cao. Sản phẩm không chỉ giàu protein mà còn chứa lượng canxi hữu cơ tự nhiên từ xương ếch. Ngoài ra FrogNutri còn tích hợp QR Code, Website và Trợ lý AI hỗ trợ người dùng tra cứu thông tin và xây dựng khẩu phần dinh dưỡng cá nhân."
   },
   {
-    keywords: ["quy trình", "sản xuất", "chế biến", "hấp cách thủy", "sấy", "nghiền", "phối trộn", "thảo mộc", "sả", "gừng", "quế"],
-    answer: "Quy trình FrogNutri gồm: sơ chế sạch thân ếch, hấp cách thủy để giữ dinh dưỡng, sấy ở 70°C, nghiền siêu mịn cả thịt lẫn xương, rồi phối trộn với sả, gừng và vỏ quế để giảm mùi tanh và cân bằng tiêu hóa."
+    keywords: ["vì sao chọn thân ếch","tại sao dùng thân ếch","thân ếch"],
+    answer: "Nhóm lựa chọn thân ếch vì đây là phần thường bị bán với giá thấp hoặc chưa được tận dụng hiệu quả. Trong khi đó thân ếch vẫn chứa lượng protein cao và đặc biệt có xương giàu canxi, photpho và khoáng chất. Việc sử dụng thân ếch giúp giảm lãng phí nguyên liệu, tăng giá trị kinh tế và tạo ra sản phẩm giàu dinh dưỡng với chi phí hợp lý."
   },
   {
-    keywords: ["mới", "sáng tạo", "kinh tế tuần hoàn", "bảo vệ hệ sinh thái", "an toàn sinh học", "qr", "web app", "ứng dụng số"],
-    answer: "FrogNutri là giải pháp kinh tế tuần hoàn: dùng thân ếch phụ phẩm để tạo ra bột giàu dinh dưỡng, thay thế bột cóc, bảo vệ môi trường và tích hợp QR + Web App để minh bạch nguồn gốc và cá nhân hóa dinh dưỡng."
+    keywords: ["protein","đạm","hàm lượng protein"],
+    answer: "Theo kết quả kiểm nghiệm, FrogNutri chứa khoảng 57,4% protein. Đây là nguồn đạm động vật có giá trị sinh học cao, dễ hấp thu và hỗ trợ phát triển cơ bắp, phục hồi cơ thể cũng như duy trì sức khỏe tổng thể."
   },
   {
-    keywords: ["kiểm nghiệm", "độ ẩm", "protein", "canxi", "chất béo", "hàm lượng"],
-    answer: "Sản phẩm đạt kiểm nghiệm: độ ẩm 4,57%, protein 57,4%, canxi hữu cơ 5676 mg/100g, chất béo 16,8%. Đây là bột dinh dưỡng an toàn, ít ẩm và dễ bảo quản, phù hợp cho trẻ em và người cao tuổi."
+    keywords: ["canxi","canxi bao nhiêu","hàm lượng canxi"],
+    answer: "FrogNutri chứa khoảng 4000–5676mg canxi trên mỗi 100g sản phẩm tùy từng dòng. Vì hàm lượng canxi khá cao nên chỉ nên sử dụng với lượng vừa phải: trẻ nhỏ khoảng 5g/ngày, người lớn khoảng 10g/ngày là đã bổ sung được lượng canxi đáng kể."
   },
   {
-    keywords: ["hướng dẫn", "sử dụng", "tiện ích", "muỗng", "định lượng", "ẩm thực", "trộn"],
-    answer: "Bột FrogNutri dùng trộn vào cháo, súp, bột ăn dặm hoặc gia vị bổ sung. Trong mỗi túi tặng kèm muỗng nhỏ 5g cho trẻ em và muỗng lớn 10g cho người lớn, giúp đong chính xác mà không cần cân."
+    keywords: ["liều lượng","dùng bao nhiêu","ăn bao nhiêu","khuyến cáo"],
+    answer: "Khuyến nghị sử dụng: Trẻ nhỏ khoảng 5g/ngày (1 muỗng nhỏ). Người trưởng thành khoảng 10g/ngày (1 muỗng lớn). Người tập gym hoặc cần bổ sung nhiều có thể dùng 10–20g/ngày. Không nên lạm dụng vì cơ thể chỉ hấp thu một lượng dinh dưỡng nhất định trong ngày."
   },
   {
-    keywords: ["tài liệu tham khảo", "chiến lược quốc gia", "bộ y tế", "y học", "studocu", "an toàn vệ sinh"],
+    keywords: ["trẻ em","ăn dặm","bé mấy tháng"],
+    answer: "Trẻ từ giai đoạn ăn dặm có thể sử dụng FrogNutri khi đã làm quen với thực phẩm giàu đạm. Nên bắt đầu với lượng nhỏ 2–3g mỗi lần để theo dõi khả năng thích nghi, sau đó tăng dần lên khoảng 5g/ngày. Sản phẩm nên được sử dụng dưới sự theo dõi của phụ huynh."
+  },
+  {
+    keywords: ["người già","cao tuổi","loãng xương"],
+    answer: "Người cao tuổi rất phù hợp với FrogNutri vì sản phẩm chứa protein và canxi hữu cơ tự nhiên. Bổ sung đều đặn khoảng 10g/ngày có thể hỗ trợ dinh dưỡng xương khớp và cung cấp đạm dễ hấp thu."
+  },
+  {
+    keywords: ["gym","tăng cơ","thể hình"],
+    answer: "Đối với người tập gym, FrogNutri là nguồn protein tự nhiên giúp hỗ trợ phục hồi và phát triển cơ bắp. Có thể sử dụng 10–20g/ngày kết hợp với chế độ luyện tập và ăn uống hợp lý."
+  },
+  {
+    keywords: ["giảm cân","ăn kiêng"],
+    answer: "FrogNutri chứa protein cao và ít chất béo không có lợi. Protein giúp tạo cảm giác no lâu hơn nên sản phẩm rất phù hợp cho người ăn kiêng hoặc kiểm soát cân nặng."
+  },
+  {
+    keywords: ["omega 3","chất béo"],
+    answer: "Sản phẩm chứa chủ yếu chất béo không no và omega-3 tự nhiên. Quy trình sấy nhiệt độ thấp giúp hạn chế oxy hóa lipid và giữ lại giá trị dinh dưỡng của nguyên liệu."
+  },
+  {
+    keywords: ["độ ẩm","ẩm mốc","bảo quản"],
+    answer: "Theo kết quả kiểm nghiệm, độ ẩm sản phẩm khoảng 4,57% — mức thấp giúp hạn chế vi sinh vật và kéo dài thời gian bảo quản. Sau khi mở túi nên đóng kín và bảo quản nơi khô ráo hoặc ngăn mát tủ lạnh."
+  },
+  {
+    keywords: ["hạn sử dụng"],
+    answer: "Khi bảo quản trong ngăn mát tủ lạnh, sản phẩm có thể duy trì chất lượng tốt trong khoảng 6 tháng. Sau khi mở túi nên sử dụng sớm và đóng kín miệng túi."
+  },
+  {
+    keywords: ["khử mùi","mùi tanh","gừng","sả","quế"],
+    answer: "Để giảm mùi tanh tự nhiên, nhóm sử dụng sả, gừng và vỏ quế trong quá trình hấp. Đây là nguyên liệu tự nhiên tạo mùi thơm dễ chịu mà không cần hương liệu hóa học."
+  },
+  {
+    keywords: ["quy trình","sản xuất","làm như thế nào","chế biến","hấp cách thủy","sấy","nghiền","phối trộn"],
+    answer: "Quy trình sản xuất gồm 8 bước: Sơ chế nguyên liệu → Hấp với sả, gừng, quế → Xay nhuyễn → Sấy ở 70°C → Nghiền siêu mịn → Rây lọc → Đóng gói → Bảo quản. Quy trình này giúp giữ dinh dưỡng và hạn chế thất thoát khoáng chất."
+  },
+  {
+    keywords: ["an toàn","kiểm nghiệm","chứng nhận"],
+    answer: "Nguồn nguyên liệu được lấy từ cơ sở nuôi ếch có hồ sơ đảm bảo an toàn thực phẩm. Sản phẩm đã được kiểm nghiệm các chỉ tiêu như độ ẩm, protein, chất béo và canxi tại phòng thí nghiệm độc lập VietLabs."
+  },
+  {
+    keywords: ["bột cóc","so sánh bột cóc"],
+    answer: "Bột cóc có protein cao nhưng tiềm ẩn nguy cơ ngộ độc nếu chế biến không đúng kỹ thuật. FrogNutri dùng ếch nuôi an toàn hơn, dễ kiểm soát nguồn gốc và không ảnh hưởng đến cân bằng sinh thái tự nhiên."
+  },
+  {
+    keywords: ["giá","bao nhiêu tiền","mua sản phẩm","bao nhiêu","tiền","chi phí"],
+    answer: "Giá bán hiện tại: Bột thân ếch FrogNutri 50.000đ/túi 100g. Bột đùi ếch FrogNutri 75.000đ/túi 100g. Bạn có thể đặt hàng trực tiếp qua mục 🛒 Mua sản phẩm trên thanh menu nhé!"
+  },
+  {
+    keywords: ["website","web","trang web"],
+    answer: "Website FrogNutri hỗ trợ giới thiệu sản phẩm, tra cứu hồ sơ kiểm nghiệm, tính toán dinh dưỡng, xem hướng dẫn sử dụng và trò chuyện cùng trợ lý AI để được tư vấn nhanh chóng."
+  },
+  {
+    keywords: ["qr","mã qr"],
+    answer: "Mỗi sản phẩm đều có mã QR giúp người dùng truy cập nhanh vào website FrogNutri để xem nguồn gốc, kết quả kiểm nghiệm, giá trị dinh dưỡng và hướng dẫn sử dụng chi tiết."
+  },
+  {
+    keywords: ["khảo sát","người dùng đánh giá"],
+    answer: "Trong khảo sát thử nghiệm, 92,3% người dùng đánh giá sản phẩm thơm hoặc rất thơm và 69,2% cho rằng sản phẩm tiện lợi, dễ sử dụng trong bữa ăn hằng ngày."
+  },
+  {
+    keywords: ["tổ chức","cơ quan chủ quản","ủy ban nhân dân","đơn vị thực hiện","lĩnh vực","thời gian hoàn thành"],
+    answer: "Dự án do Ủy ban nhân dân Phường Tân Ngãi, tỉnh Vĩnh Long chỉ đạo, thực hiện bởi Trường THCS Nguyễn Đình Chiểu. Lĩnh vực dự thi là giải pháp ứng phó biến đổi khí hậu, bảo vệ môi trường và phát triển kinh tế."
+  },
+  {
+    keywords: ["tác giả","nhóm thực hiện","ai","nhóm","thực hiện","giáo viên hướng dẫn"],
+    answer: "Đề tài được thực hiện bởi nhóm học sinh lớp 9/1 gồm Nguyễn Anh Thơ (40%), Hà Hoàng Thiện (40%) và Võ Huỳnh Uyên Nhi (20%) dưới sự hướng dẫn của Thầy Đỗ Hữu Thịnh."
+  },
+  {
+    keywords: ["lý do","chọn đề tài","cấp thiết","suy dinh dưỡng","còi xương","nông thôn","thực phẩm phụ phẩm"],
+    answer: "FrogNutri giải quyết thiếu hụt đạm cao và canxi hữu cơ ở nông thôn, tận dụng thân ếch phụ phẩm giá rẻ tránh lãng phí. Đồng thời sản phẩm thay thế bột cóc độc hại, bảo vệ đa dạng sinh học và an toàn cho trẻ em."
+  },
+  {
+    keywords: ["hướng dẫn","sử dụng","cách dùng","ăn sao","dùng như thế nào","muỗng","định lượng","trộn"],
+    answer: "Bột FrogNutri dùng trộn vào cháo, súp, bột ăn dặm, cơm, mì, salad hoặc dùng trực tiếp như snack. Trong mỗi túi tặng kèm muỗng nhỏ 5g cho trẻ em và muỗng lớn 10g cho người lớn, giúp đong chính xác mà không cần cân."
+  },
+  {
+    keywords: ["tài liệu tham khảo","chiến lược quốc gia","bộ y tế","y học","studocu","an toàn vệ sinh"],
     answer: "Tài liệu tham khảo gồm Quyết định 02/QĐ-TTg về dinh dưỡng 2021–2030, Thông tư 11/VBHN-BYT về an toàn thực phẩm bổ sung, và nghiên cứu dinh dưỡng lâm sàng về vai trò protein & canxi cho hệ cơ xương khớp trẻ em."
   },
   {
-    keywords: ["giá", "bao nhiêu", "tiền", "chi phí"],
-    answer: "Bột thân ếch có giá 22.500đ/túi 250g. Bột đùi ếch cao cấp hơn có giá 39.500đ/túi 250g."
-  },
-  {
-    keywords: ["ai", "tác giả", "nhóm", "thực hiện"],
-    answer: "Nhóm tác giả gồm: Nguyễn Anh Thơ, Võ Huỳnh Uyên Nhi, Hà Hoàng Thiện (Lớp 9), thực hiện cùng giáo viên hướng dẫn Thầy Đỗ Hữu Thịnh."
-  },
-  {
-    keywords: ["đạm", "protein", "canxi", "dinh dưỡng", "chỉ số"],
-    answer: "Sản phẩm đạt hàm lượng protein 57,4% và canxi nguyên phần 5676mg/100g vì nghiền cả thân và xương, giúp bổ sung đạm và canxi dễ hấp thu."
-  },
-  {
-    keywords: ["cách dùng", "ăn sao", "dùng như thế nào"],
-    answer: "Có thể trộn vào cháo, cơm, mì, súp, salad hoặc dùng trực tiếp như snack."
-  },
-  {
-    keywords: ["mua", "đặt hàng", "order", "mua sản phẩm"],
-    answer: "Bạn có thể đặt hàng trực tiếp qua mục 🛒 Mua sản phẩm trên thanh menu. Điền thông tin và nhấn nút Gửi để gửi đơn hàng cho chúng mình qua Gmail nhé!"
+    keywords: ["mua","đặt hàng","order"],
+    answer: "Bạn có thể đặt hàng trực tiếp qua mục 🛒 Mua sản phẩm trên thanh menu. Điền thông tin và nhấn nút Gửi để gửi đơn hàng qua Gmail nhé!"
   }
 ];
 
