@@ -9,7 +9,6 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-/* ====== THEME & GLOBAL ====== */
 :root {
   --bg: #f6fff8;
   --card: #ffffffcc;
@@ -19,7 +18,6 @@
   --text: #222;
   --shadow: 0 15px 40px rgba(0,0,0,.08);
 }
-
 body.dark {
   --bg: #0f1a13;
   --card: #1e2b24cc;
@@ -28,1005 +26,212 @@ body.dark {
   --primary: #66bb6a;
   --text: #eee;
 }
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Poppins, sans-serif;
-  transition: .25s;
-}
-
-body {
-  display: flex;
-  flex-direction: row;
-  min-height: 100vh;
-  background: var(--bg);
-  color: var(--text);
-}
-
-/* ====== SIDEBAR ====== */
-.sidebar {
-  width: 240px;
-  background: linear-gradient(180deg, var(--sidebar1), var(--sidebar2));
-  padding: 25px;
-  display: flex;
-  flex-direction: column;
-  color: white;
-  position: fixed;
-  height: 100vh;
-  left: 0;
-  top: 0;
-  z-index: 100;
-  overflow-y: auto;
-}
-
-.logo {
-  font-size: 22px;
-  font-weight: 600;
-  margin-bottom: 30px;
-}
-
-.sidebar-top {
-  display: none;
-}
-
-.hamburger {
-  display: none;
-}
-
-.sidebar-nav {
-  display: flex;
-  flex-direction: column;
-  max-height: none;
-  overflow: visible;
-}
-
-.sidebar a {
-  text-decoration: none;
-  color: white;
-  padding: 12px 14px;
-  border-radius: 12px;
-  margin-bottom: 8px;
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  cursor: pointer;
-}
-
-.sidebar a:hover {
-  background: rgba(255, 255, 255, .25);
-  transform: translateX(6px);
-}
-
-.sidebar a.active {
-  background: white;
-  color: var(--primary);
-  font-weight: 600;
-}
-
-.logout {
-  margin-top: auto;
-  background: #e53935;
-}
-
-.logout:hover {
-  background: #c62828;
-}
-
-@media (max-width: 768px) {
-  .sidebar {
-    position: relative;
-    width: 100%;
-    height: auto;
-    flex-direction: row;
-    align-items: center;
-    padding: 15px;
-  }
-
-  .sidebar-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    gap: 10px;
-  }
-
-  .sidebar .logo {
-    margin-bottom: 0;
-  }
-
-  .hamburger {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    cursor: pointer;
-    z-index: 110;
-  }
-
-  .hamburger span {
-    width: 26px;
-    height: 3px;
-    border-radius: 2px;
-    background: white;
-    transition: transform .3s ease, opacity .3s ease;
-  }
-
-  .hamburger.active span:nth-child(1) {
-    transform: rotate(45deg) translate(4px, 4px);
-  }
-
-  .hamburger.active span:nth-child(2) {
-    opacity: 0;
-  }
-
-  .hamburger.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(4px, -4px);
-  }
-
-  .sidebar-nav {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background: linear-gradient(180deg, var(--sidebar1), var(--sidebar2));
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height .3s ease;
-    border-bottom-left-radius: 16px;
-    border-bottom-right-radius: 16px;
-  }
-
-  .sidebar-nav.active {
-    max-height: 420px;
-  }
-
-  .sidebar a {
-    margin-bottom: 0;
-    padding: 16px 18px;
-    border-radius: 0;
-  }
-
-  main {
-    margin-left: 0;
-    padding: 20px;
-  }
-
-  .topbar {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 15px;
-  }
-
-  .chat-wrap {
-    height: auto;
-  }
-
-  .auth-card {
-    width: auto;
-    margin: 30px 15px;
-  }
-}
-
-/* ====== MAIN ====== */
-main {
-  flex: 1;
-  margin-left: 260px;
-  padding: 35px;
-  overflow: auto;
-  animation: fade .6s ease;
-  width: calc(100% - 260px);
-}
-
-@keyframes fade {
-  from { opacity: 0; transform: translateY(15px); }
-  to { opacity: 1; }
-}
-
-/* ====== PAGES ====== */
-.page {
-  display: none;
-}
-
-.page.active {
-  display: block;
-}
-
-/* ====== PAGE HEADER ====== */
-.topbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30px;
-}
-
-.topbar h2 {
-  font-size: 28px;
-  font-weight: 600;
-}
-
-.toggle-theme {
-  cursor: pointer;
-  padding: 9px 15px;
-  border-radius: 12px;
-  background: var(--primary);
-  color: white;
-  border: none;
-  font-size: 14px;
-}
-
-/* ====== GRID & CARD ====== */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 25px;
-}
-
-.card {
-  background: var(--card);
-  backdrop-filter: blur(18px);
-  padding: 25px;
-  border-radius: 20px;
-  box-shadow: var(--shadow);
-  transform: translateY(0);
-}
-
-.card:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 25px 55px rgba(0,0,0,.15);
-}
-
-.icon {
-  font-size: 38px;
-  margin-bottom: 12px;
-  color: var(--primary);
-}
-
-.card h3 {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-.card p {
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-/* ====== FORMS ====== */
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  max-width: 600px;
-}
-
-input, textarea, select {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background: var(--card);
-  color: var(--text);
-  font-size: 14px;
-}
-
-input:focus, textarea:focus, select:focus {
-  outline: none;
-  border-color: var(--primary);
-  box-shadow: 0 0 12px var(--primary)55;
-}
-
-button, .btn {
-  padding: 12px 20px;
-  border: none;
-  border-radius: 8px;
-  background: var(--primary);
-  color: white;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 600;
-  transition: 0.3s;
-}
-
-button:hover, .btn:hover {
-  filter: brightness(1.1);
-}
-
-/* ====== PROFILE ====== */
-.profile-wrap {
-  display: flex;
-  gap: 40px;
-  align-items: flex-start;
-}
-
-.avatar {
-  width: 170px;
-  height: 170px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 6px solid var(--primary);
-  box-shadow: 0 10px 30px rgba(0,0,0,.15);
-}
-
-/* ====== CHAT ====== */
-.chat-wrap {
-  display: flex;
-  justify-content: center;
-  height: 500px;
-}
-
-.chat-box {
-  width: 100%;
-  max-width: 900px;
-  background: var(--card);
-  backdrop-filter: blur(15px);
-  border-radius: 22px;
-  box-shadow: var(--shadow);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-.messages {
-  flex: 1;
-  padding: 20px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.msg {
-  padding: 12px 16px;
-  border-radius: 18px;
-  max-width: 70%;
-  animation: fade .25s ease;
-}
-
-.msg.user {
-  background: var(--primary);
-  color: white;
-  align-self: flex-end;
-}
-
-.msg.bot {
-  background: #e8f5e9;
-  align-self: flex-start;
-}
-
-body.dark .msg.bot {
-  background: #2a3b31;
-}
-
-.input-area {
-  display: flex;
-  gap: 10px;
-  padding: 15px;
-}
-
-.input-area input {
-  flex: 1;
-  margin: 0;
-}
-
-.input-area button {
-  flex-shrink: 0;
-  margin: 0;
-}
-
-/* ====== TYPING ====== */
-.typing {
-  font-size: 13px;
-  opacity: .6;
-  padding-left: 20px;
-  padding-bottom: 10px;
-}
-
-.chat-hint {
-  margin: 0 15px 10px;
-  color: #475569;
-  font-size: 13px;
-  line-height: 1.5;
-}
-
-@media (max-width: 768px) {
-  .chat-hint {
-    margin: 0 15px 12px;
-    font-size: 12px;
-  }
-}
-
-/* ====== LOGIN/REGISTER PAGE ====== */
-.auth-card {
-  width: 360px;
-  margin: 50px auto;
-  padding: 40px;
-  border-radius: 25px;
-  background: rgba(255, 255, 255, .75);
-  backdrop-filter: blur(12px);
-  box-shadow: 0 30px 60px rgba(0,0,0,.15);
-  text-align: center;
-  animation: float 4s infinite ease-in-out;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
-.auth-card h2 {
-  color: var(--primary);
-  margin-bottom: 5px;
-}
-
-.auth-card form {
-  align-items: center;
-}
-
-.input-group {
-  position: relative;
-  margin-top: 18px;
-}
-
-.input-group input {
-  width: 100%;
-  padding: 12px 40px 12px 12px;
-  border-radius: 12px;
-  border: 1px solid #ddd;
-}
-
-.eye {
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
-}
-
-.msg-box {
-  margin-top: 12px;
-  font-size: 14px;
-}
-
-.msg-box.success {
-  color: #2e7d32;
-}
-
-.msg-box.error {
-  color: #d32f2f;
-}
-
-.auth-link {
-  margin-top: 15px;
-}
-
-.auth-link a {
-  color: var(--primary);
-  text-decoration: none;
-  font-weight: 600;
-}
-
-/* ====== TABLE ====== */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-}
-
-th, td {
-  padding: 12px;
-  text-align: left;
-  border-bottom: 1px solid rgba(0,0,0,.1);
-}
-
-th {
-  background: var(--primary);
-  color: white;
-  font-weight: 600;
-}
-
-/* ====== TOAST ====== */
-.toast {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  background: #4CAF50;
-  color: white;
-  padding: 12px 20px;
-  border-radius: 10px;
-  animation: toastAnim 2.5s forwards;
-}
-
-@keyframes toastAnim {
-  0% { opacity: 0; transform: translateY(20px); }
-  20%, 80% { opacity: 1; }
-  100% { opacity: 0; }
-}
-
-/* ====== BADGE ====== */
-.badge {
-  background: var(--primary);
-  color: white;
-  padding: 6px 14px;
-  border-radius: 20px;
-  display: inline-block;
-  margin-bottom: 10px;
-  font-size: 13px;
-}
-
-.report-section {
-  margin-top: 30px;
-}
-
-.section-card {
-  background: linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,.85));
-  border: 1px solid rgba(34,34,34,.08);
-  border-radius: 24px;
-  padding: 28px;
-  box-shadow: 0 20px 45px rgba(0,0,0,.06);
-}
-
-.section-header {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-bottom: 22px;
-}
-
-.section-tag {
-  text-transform: uppercase;
-  letter-spacing: .12em;
-  color: #4CAF50;
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.section-desc {
-  color: #6b7280;
-  font-size: 14px;
-  max-width: 620px;
-}
-
-.report-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 18px;
-}
-
-.report-item {
-  padding: 24px;
-  border-radius: 18px;
-  background: rgba(255,255,255,.95);
-  border: 1px solid rgba(15,23,42,.08);
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.report-item h4 {
-  margin: 0;
-  font-size: 18px;
-}
-
-.report-item p {
-  margin: 0;
-  color: #64748b;
-  font-size: 14px;
-}
-
-.report-icon {
-  width: 46px;
-  height: 46px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 14px;
-  background: rgba(76,175,80,.12);
-  color: var(--primary);
-  font-size: 22px;
-}
-
-.report-btn {
-  align-self: flex-start;
-  padding: 10px 18px;
-  border-radius: 999px;
-  background: #f8fafc;
-  color: var(--text);
-  border: 1px solid rgba(148,163,184,.35);
-  font-weight: 600;
-  text-decoration: none;
-  transition: transform .2s ease, background .2s ease;
-}
-
-.report-btn:hover {
-  background: #e2e8f0;
-  transform: translateY(-1px);
-}
-
-/* ====== ORDER PAGE ====== */
-.order-product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 15px;
-  margin-bottom: 5px;
-}
-
-.product-option {
-  border: 2px solid #ccc;
-  border-radius: 14px;
-  padding: 18px;
-  cursor: pointer;
-  transition: all .2s;
-  background: var(--card);
-  text-align: center;
-}
-
-.product-option:hover {
-  border-color: var(--primary);
-  transform: translateY(-3px);
-}
-
-.product-option.selected {
-  border-color: var(--primary);
-  background: rgba(76,175,80,.08);
-}
-
-.product-option .product-emoji {
-  font-size: 36px;
-  margin-bottom: 8px;
-}
-
-.product-option .product-name {
-  font-weight: 600;
-  font-size: 14px;
-  margin-bottom: 4px;
-}
-
-.product-option .product-price {
-  color: var(--primary);
-  font-weight: 700;
-  font-size: 16px;
-}
-
-.product-option .product-desc {
-  font-size: 12px;
-  color: #666;
-  margin-top: 4px;
-}
-
-.order-form-label {
-  display: block;
-  font-size: 14px;
-  font-weight: 500;
-  margin-bottom: 6px;
-  color: var(--text);
-}
-
-/* ====== MOBILE OPTIMIZATION ====== */
-@media (max-width: 480px) {
-  body {
-    flex-direction: column;
-  }
-
-  .sidebar {
-    width: 100%;
-    height: auto;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    padding: 12px;
-    flex-direction: row;
-    gap: 0;
-    align-items: center;
-    z-index: 1000;
-    border-bottom: 1px solid rgba(0,0,0,0.1);
-  }
-
-  .sidebar-top {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .sidebar .logo {
-    font-size: 18px;
-    margin-bottom: 0;
-  }
-
-  .hamburger {
-    display: flex;
-    gap: 4px;
-    flex-direction: column;
-  }
-
-  .hamburger span {
-    width: 22px;
-    height: 2.5px;
-  }
-
-  .sidebar-nav {
-    position: fixed;
-    top: 55px;
-    left: 0;
-    width: 100%;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-    flex-direction: column;
-    background: linear-gradient(180deg, var(--sidebar1), var(--sidebar2));
-    border-radius: 0;
-    z-index: 999;
-  }
-
-  .sidebar-nav.active {
-    max-height: 460px;
-  }
-
-  .sidebar a {
-    padding: 14px 16px;
-    font-size: 13px;
-    margin: 0;
-    border-radius: 0;
-  }
-
-  main {
-    margin-left: 0;
-    padding: 16px;
-    margin-top: 55px;
-    width: 100%;
-  }
-
-  .topbar {
-    flex-direction: column;
-    gap: 12px;
-    margin-bottom: 20px;
-  }
-
-  .topbar h2 {
-    font-size: 18px;
-  }
-
-  .toggle-theme {
-    width: 100%;
-    padding: 10px 12px;
-    font-size: 13px;
-  }
-
-  .grid {
-    grid-template-columns: 1fr;
-    gap: 15px;
-  }
-
-  .card {
-    padding: 16px;
-    border-radius: 16px;
-    margin-bottom: 0;
-  }
-
-  .card h3 {
-    font-size: 16px;
-  }
-
-  .card p {
-    font-size: 13px;
-  }
-
-  .icon {
-    font-size: 32px;
-    margin-bottom: 10px;
-  }
-
-  input, textarea, select {
-    padding: 11px;
-    font-size: 16px;
-  }
-
-  button, .btn {
-    padding: 12px 16px;
-    font-size: 13px;
-    min-height: 44px;
-  }
-
-  .auth-card {
-    width: 100%;
-    margin: 60px 0 20px 0;
-    padding: 24px 16px;
-    border-radius: 20px;
-  }
-
-  .auth-card h2 {
-    font-size: 20px;
-  }
-
-  .auth-card p {
-    font-size: 12px;
-  }
-
-  .input-group {
-    margin-top: 14px;
-  }
-
-  .input-group input {
-    padding: 11px 36px 11px 11px;
-    font-size: 14px;
-  }
-
-  .eye {
-    font-size: 16px;
-  }
-
-  .profile-wrap {
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
-  }
-
-  .avatar {
-    width: 120px;
-    height: 120px;
-  }
-
-  .chat-wrap {
-    height: calc(100vh - 250px);
-  }
-
-  .chat-box {
-    border-radius: 16px;
-  }
-
-  .messages {
-    gap: 10px;
-    padding: 16px;
-  }
-
-  .msg {
-    max-width: 85%;
-    padding: 10px 14px;
-    font-size: 13px;
-    border-radius: 14px;
-  }
-
-  .chat-hint {
-    font-size: 11px;
-    padding: 0 12px;
-    margin: 0 0 8px 0;
-  }
-
-  .input-area {
-    padding: 12px;
-    gap: 8px;
-  }
-
-  .input-area input {
-    font-size: 14px;
-    padding: 10px;
-  }
-
-  .input-area button {
-    padding: 10px 14px;
-  }
-
-  .typing {
-    padding-left: 16px;
-    font-size: 12px;
-    padding-bottom: 8px;
-  }
-
-  table {
-    font-size: 12px;
-  }
-
-  th, td {
-    padding: 8px 6px;
-  }
-
-  .badge {
-    font-size: 11px;
-    padding: 4px 10px;
-  }
-
-  .report-grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-
-  .report-item {
-    padding: 16px;
-  }
-
-  .report-item h4 {
-    font-size: 15px;
-  }
-
-  .report-item p {
-    font-size: 13px;
-  }
-
-  .section-card {
-    padding: 20px;
-  }
-
-  .section-desc {
-    font-size: 13px;
-  }
-
-  #res-box {
-    padding: 16px !important;
-  }
-
-  #res-box h2 {
-    font-size: 28px !important;
-  }
-
-  #res-box p {
-    font-size: 12px;
-  }
-
-  .order-product-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* ====== TABLET OPTIMIZATION ====== */
-@media (max-width: 768px) and (min-width: 481px) {
-  main {
-    padding: 24px;
-  }
-
-  .topbar h2 {
-    font-size: 22px;
-  }
-
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .card {
-    padding: 20px;
-  }
-
-  .auth-card {
-    width: 90%;
-    margin: 40px auto;
-    padding: 30px 20px;
-  }
-
-  .chat-wrap {
-    height: calc(100vh - 200px);
-  }
-
-  .profile-wrap {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .avatar {
-    width: 140px;
-    height: 140px;
-  }
-
-  .report-grid {
-    grid-template-columns: 1fr;
-  }
+* { margin:0; padding:0; box-sizing:border-box; font-family:Poppins,sans-serif; transition:.25s; }
+body { display:flex; flex-direction:row; min-height:100vh; background:var(--bg); color:var(--text); }
+
+/* SIDEBAR */
+.sidebar { width:240px; background:linear-gradient(180deg,var(--sidebar1),var(--sidebar2)); padding:25px; display:flex; flex-direction:column; color:white; position:fixed; height:100vh; left:0; top:0; z-index:100; overflow-y:auto; }
+.logo { font-size:22px; font-weight:600; margin-bottom:30px; }
+.sidebar-top { display:none; }
+.hamburger { display:none; }
+.sidebar-nav { display:flex; flex-direction:column; max-height:none; overflow:visible; }
+.sidebar a { text-decoration:none; color:white; padding:12px 14px; border-radius:12px; margin-bottom:8px; display:flex; gap:10px; align-items:center; cursor:pointer; }
+.sidebar a:hover { background:rgba(255,255,255,.25); transform:translateX(6px); }
+.sidebar a.active { background:white; color:var(--primary); font-weight:600; }
+.logout { margin-top:auto; background:#e53935; }
+.logout:hover { background:#c62828; }
+
+/* MAIN */
+main { flex:1; margin-left:260px; padding:35px; overflow:auto; animation:fade .6s ease; width:calc(100% - 260px); }
+@keyframes fade { from{opacity:0;transform:translateY(15px)} to{opacity:1} }
+.page { display:none; }
+.page.active { display:block; }
+
+/* TOPBAR */
+.topbar { display:flex; justify-content:space-between; align-items:center; margin-bottom:30px; }
+.topbar h2 { font-size:28px; font-weight:600; }
+.toggle-theme { cursor:pointer; padding:9px 15px; border-radius:12px; background:var(--primary); color:white; border:none; font-size:14px; }
+
+/* GRID & CARD */
+.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:25px; }
+.card { background:var(--card); backdrop-filter:blur(18px); padding:25px; border-radius:20px; box-shadow:var(--shadow); transform:translateY(0); }
+.card:hover { transform:translateY(-8px) scale(1.02); box-shadow:0 25px 55px rgba(0,0,0,.15); }
+.icon { font-size:38px; margin-bottom:12px; color:var(--primary); }
+.card h3 { font-size:18px; margin-bottom:10px; }
+.card p { font-size:14px; line-height:1.6; }
+
+/* FORMS */
+form { display:flex; flex-direction:column; gap:15px; max-width:600px; }
+input, textarea, select { width:100%; padding:12px; border:1px solid #ccc; border-radius:8px; background:var(--card); color:var(--text); font-size:14px; }
+input:focus, textarea:focus, select:focus { outline:none; border-color:var(--primary); box-shadow:0 0 12px var(--primary)55; }
+button, .btn { padding:12px 20px; border:none; border-radius:8px; background:var(--primary); color:white; cursor:pointer; font-size:14px; font-weight:600; transition:0.3s; }
+button:hover, .btn:hover { filter:brightness(1.1); }
+
+/* PROFILE */
+.profile-wrap { display:flex; gap:40px; align-items:flex-start; }
+.avatar { width:170px; height:170px; border-radius:50%; object-fit:cover; border:6px solid var(--primary); box-shadow:0 10px 30px rgba(0,0,0,.15); }
+
+/* CHAT */
+.chat-wrap { display:flex; justify-content:center; height:500px; }
+.chat-box { width:100%; max-width:900px; background:var(--card); backdrop-filter:blur(15px); border-radius:22px; box-shadow:var(--shadow); display:flex; flex-direction:column; overflow:hidden; }
+.messages { flex:1; padding:20px; overflow-y:auto; display:flex; flex-direction:column; gap:12px; }
+.msg { padding:12px 16px; border-radius:18px; max-width:70%; animation:fade .25s ease; }
+.msg.user { background:var(--primary); color:white; align-self:flex-end; }
+.msg.bot { background:#e8f5e9; align-self:flex-start; }
+body.dark .msg.bot { background:#2a3b31; }
+.input-area { display:flex; gap:10px; padding:15px; }
+.input-area input { flex:1; margin:0; }
+.input-area button { flex-shrink:0; margin:0; }
+.typing { font-size:13px; opacity:.6; padding-left:20px; padding-bottom:10px; }
+.chat-hint { margin:0 15px 10px; color:#475569; font-size:13px; line-height:1.5; }
+
+/* AUTH */
+.auth-card { width:360px; margin:50px auto; padding:40px; border-radius:25px; background:rgba(255,255,255,.75); backdrop-filter:blur(12px); box-shadow:0 30px 60px rgba(0,0,0,.15); text-align:center; animation:float 4s infinite ease-in-out; }
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+.auth-card h2 { color:var(--primary); margin-bottom:5px; }
+.auth-card form { align-items:center; }
+.input-group { position:relative; margin-top:18px; }
+.input-group input { width:100%; padding:12px 40px 12px 12px; border-radius:12px; border:1px solid #ddd; }
+.eye { position:absolute; right:12px; top:50%; transform:translateY(-50%); cursor:pointer; }
+.msg-box { margin-top:12px; font-size:14px; }
+.msg-box.success { color:#2e7d32; }
+.msg-box.error { color:#d32f2f; }
+.auth-link { margin-top:15px; }
+.auth-link a { color:var(--primary); text-decoration:none; font-weight:600; }
+
+/* TABLE */
+table { width:100%; border-collapse:collapse; margin-top:20px; }
+th, td { padding:12px; text-align:left; border-bottom:1px solid rgba(0,0,0,.1); }
+th { background:var(--primary); color:white; font-weight:600; }
+
+/* TOAST */
+.toast { position:fixed; bottom:30px; right:30px; background:#4CAF50; color:white; padding:12px 20px; border-radius:10px; animation:toastAnim 2.5s forwards; }
+@keyframes toastAnim { 0%{opacity:0;transform:translateY(20px)} 20%,80%{opacity:1} 100%{opacity:0} }
+
+/* BADGE */
+.badge { background:var(--primary); color:white; padding:6px 14px; border-radius:20px; display:inline-block; margin-bottom:10px; font-size:13px; }
+
+/* REPORT */
+.report-section { margin-top:30px; }
+.section-card { background:linear-gradient(180deg,rgba(255,255,255,.95),rgba(255,255,255,.85)); border:1px solid rgba(34,34,34,.08); border-radius:24px; padding:28px; box-shadow:0 20px 45px rgba(0,0,0,.06); }
+.section-header { display:flex; flex-direction:column; gap:12px; margin-bottom:22px; }
+.section-tag { text-transform:uppercase; letter-spacing:.12em; color:#4CAF50; font-size:12px; font-weight:700; }
+.section-desc { color:#6b7280; font-size:14px; max-width:620px; }
+.report-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:18px; }
+.report-item { padding:24px; border-radius:18px; background:rgba(255,255,255,.95); border:1px solid rgba(15,23,42,.08); display:flex; flex-direction:column; gap:12px; }
+.report-item h4 { margin:0; font-size:18px; }
+.report-item p { margin:0; color:#64748b; font-size:14px; }
+.report-icon { width:46px; height:46px; display:inline-flex; align-items:center; justify-content:center; border-radius:14px; background:rgba(76,175,80,.12); color:var(--primary); font-size:22px; }
+.report-btn { align-self:flex-start; padding:10px 18px; border-radius:999px; background:#f8fafc; color:var(--text); border:1px solid rgba(148,163,184,.35); font-weight:600; text-decoration:none; transition:transform .2s ease,background .2s ease; }
+.report-btn:hover { background:#e2e8f0; transform:translateY(-1px); }
+
+/* ORDER */
+.order-product-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:15px; margin-bottom:5px; }
+.product-option { border:2px solid #ccc; border-radius:14px; padding:18px; cursor:pointer; transition:all .2s; background:var(--card); text-align:center; }
+.product-option:hover { border-color:var(--primary); transform:translateY(-3px); }
+.product-option.selected { border-color:var(--primary); background:rgba(76,175,80,.08); }
+.product-option .product-emoji { font-size:36px; margin-bottom:8px; }
+.product-option .product-name { font-weight:600; font-size:14px; margin-bottom:4px; }
+.product-option .product-price { color:var(--primary); font-weight:700; font-size:16px; }
+.product-option .product-desc { font-size:12px; color:#666; margin-top:4px; }
+.order-form-label { display:block; font-size:14px; font-weight:500; margin-bottom:6px; color:var(--text); }
+
+/* MOBILE */
+@media (max-width:768px) {
+  .sidebar { position:relative; width:100%; height:auto; flex-direction:row; align-items:center; padding:15px; }
+  .sidebar-top { display:flex; align-items:center; justify-content:space-between; width:100%; gap:10px; }
+  .sidebar .logo { margin-bottom:0; }
+  .hamburger { display:flex; flex-direction:column; gap:5px; cursor:pointer; z-index:110; }
+  .hamburger span { width:26px; height:3px; border-radius:2px; background:white; transition:transform .3s ease,opacity .3s ease; }
+  .hamburger.active span:nth-child(1) { transform:rotate(45deg) translate(4px,4px); }
+  .hamburger.active span:nth-child(2) { opacity:0; }
+  .hamburger.active span:nth-child(3) { transform:rotate(-45deg) translate(4px,-4px); }
+  .sidebar-nav { position:absolute; top:100%; left:0; width:100%; background:linear-gradient(180deg,var(--sidebar1),var(--sidebar2)); max-height:0; overflow:hidden; transition:max-height .3s ease; border-bottom-left-radius:16px; border-bottom-right-radius:16px; }
+  .sidebar-nav.active { max-height:420px; }
+  .sidebar a { margin-bottom:0; padding:16px 18px; border-radius:0; }
+  main { margin-left:0; padding:20px; }
+  .topbar { flex-direction:column; align-items:flex-start; gap:15px; }
+  .chat-wrap { height:auto; }
+  .auth-card { width:auto; margin:30px 15px; }
+  .chat-hint { margin:0 15px 12px; font-size:12px; }
+}
+
+@media (max-width:480px) {
+  body { flex-direction:column; }
+  .sidebar { width:100%; height:auto; position:fixed; top:0; left:0; right:0; padding:12px; flex-direction:row; gap:0; align-items:center; z-index:1000; border-bottom:1px solid rgba(0,0,0,0.1); }
+  .sidebar-top { width:100%; display:flex; justify-content:space-between; align-items:center; }
+  .sidebar .logo { font-size:18px; margin-bottom:0; }
+  .hamburger { display:flex; gap:4px; flex-direction:column; }
+  .hamburger span { width:22px; height:2.5px; }
+  .sidebar-nav { position:fixed; top:55px; left:0; width:100%; max-height:0; overflow:hidden; transition:max-height 0.3s ease; flex-direction:column; background:linear-gradient(180deg,var(--sidebar1),var(--sidebar2)); border-radius:0; z-index:999; }
+  .sidebar-nav.active { max-height:460px; }
+  .sidebar a { padding:14px 16px; font-size:13px; margin:0; border-radius:0; }
+  main { margin-left:0; padding:16px; margin-top:55px; width:100%; }
+  .topbar { flex-direction:column; gap:12px; margin-bottom:20px; }
+  .topbar h2 { font-size:18px; }
+  .toggle-theme { width:100%; padding:10px 12px; font-size:13px; }
+  .grid { grid-template-columns:1fr; gap:15px; }
+  .card { padding:16px; border-radius:16px; margin-bottom:0; }
+  .card h3 { font-size:16px; }
+  .card p { font-size:13px; }
+  .icon { font-size:32px; margin-bottom:10px; }
+  input, textarea, select { padding:11px; font-size:16px; }
+  button, .btn { padding:12px 16px; font-size:13px; min-height:44px; }
+  .auth-card { width:100%; margin:60px 0 20px 0; padding:24px 16px; border-radius:20px; }
+  .auth-card h2 { font-size:20px; }
+  .auth-card p { font-size:12px; }
+  .input-group { margin-top:14px; }
+  .input-group input { padding:11px 36px 11px 11px; font-size:14px; }
+  .eye { font-size:16px; }
+  .profile-wrap { flex-direction:column; gap:20px; align-items:center; }
+  .avatar { width:120px; height:120px; }
+  .chat-wrap { height:calc(100vh - 250px); }
+  .chat-box { border-radius:16px; }
+  .messages { gap:10px; padding:16px; }
+  .msg { max-width:85%; padding:10px 14px; font-size:13px; border-radius:14px; }
+  .chat-hint { font-size:11px; padding:0 12px; margin:0 0 8px 0; }
+  .input-area { padding:12px; gap:8px; }
+  .input-area input { font-size:14px; padding:10px; }
+  .input-area button { padding:10px 14px; }
+  .typing { padding-left:16px; font-size:12px; padding-bottom:8px; }
+  table { font-size:12px; }
+  th, td { padding:8px 6px; }
+  .badge { font-size:11px; padding:4px 10px; }
+  .report-grid { grid-template-columns:1fr; gap:12px; }
+  .report-item { padding:16px; }
+  .report-item h4 { font-size:15px; }
+  .report-item p { font-size:13px; }
+  .section-card { padding:20px; }
+  .section-desc { font-size:13px; }
+  #res-box { padding:16px !important; }
+  #res-box h2 { font-size:28px !important; }
+  #res-box p { font-size:12px; }
+  .order-product-grid { grid-template-columns:1fr; }
+}
+
+@media (max-width:768px) and (min-width:481px) {
+  main { padding:24px; }
+  .topbar h2 { font-size:22px; }
+  .grid { grid-template-columns:repeat(2,1fr); }
+  .card { padding:20px; }
+  .auth-card { width:90%; margin:40px auto; padding:30px 20px; }
+  .chat-wrap { height:calc(100vh - 200px); }
+  .profile-wrap { flex-direction:column; align-items:center; }
+  .avatar { width:140px; height:140px; }
+  .report-grid { grid-template-columns:1fr; }
 }
 </style>
 </head>
-
 <body>
 
-<!-- ====== SIDEBAR ====== -->
+<!-- SIDEBAR -->
 <div class="sidebar" id="sidebar">
   <div class="sidebar-top">
     <div class="logo">🐸 FrogNutri</div>
     <div class="hamburger" id="hamburger" onclick="toggleMenu()">
-      <span></span>
-      <span></span>
-      <span></span>
+      <span></span><span></span><span></span>
     </div>
   </div>
-
   <div class="sidebar-nav" id="sidebarNav">
     <a onclick="showPage('dashboard')" id="menu-dashboard" style="display:none">🏠 Dashboard</a>
     <a onclick="showPage('about')" id="menu-about" style="display:none">📦 Sản phẩm</a>
@@ -1039,398 +244,287 @@ th {
   </div>
 </div>
 
-<!-- ====== MAIN CONTENT ====== -->
 <main>
 
-  <!-- ====== LOGIN PAGE ====== -->
-  <div class="page active" id="page-login">
-    <div class="auth-card">
-      <h2>🐸 FrogNutri</h2>
-      <p>Đăng nhập</p>
+<!-- LOGIN -->
+<div class="page active" id="page-login">
+  <div class="auth-card">
+    <h2>🐸 FrogNutri</h2>
+    <p>Đăng nhập</p>
+    <form onsubmit="handleLogin(event)">
+      <div class="input-group">
+        <input id="login-email" type="email" placeholder="Email" required>
+      </div>
+      <div class="input-group">
+        <input id="login-pass" type="password" placeholder="Mật khẩu" required>
+        <span class="eye" onclick="togglePassword('login-pass')">👁</span>
+      </div>
+      <button type="submit">Đăng nhập</button>
+      <div id="login-msg" class="msg-box"></div>
+    </form>
+    <div class="auth-link">Chưa có tài khoản? <a onclick="showPage('register')">Đăng ký ngay</a></div>
+  </div>
+</div>
 
-      <form onsubmit="handleLogin(event)">
-        <div class="input-group">
-          <input id="login-email" type="email" placeholder="Email" required>
+<!-- REGISTER -->
+<div class="page" id="page-register">
+  <div class="auth-card">
+    <h2>🐸 FrogNutri</h2>
+    <p>Tạo tài khoản mới</p>
+    <form onsubmit="handleRegister(event)">
+      <div class="input-group">
+        <input id="register-name" type="text" placeholder="Họ và tên" required>
+      </div>
+      <div class="input-group">
+        <input id="register-email" type="email" placeholder="Email" required>
+      </div>
+      <div class="input-group">
+        <input id="register-pass" type="password" placeholder="Mật khẩu" required>
+        <span class="eye" onclick="togglePassword('register-pass')">👁</span>
+      </div>
+      <button type="submit">Đăng ký</button>
+      <div id="register-msg" class="msg-box"></div>
+    </form>
+    <div class="auth-link">Đã có tài khoản? <a onclick="showPage('login')">Đăng nhập</a></div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div class="page" id="page-dashboard">
+  <div class="topbar">
+    <h2>Xin chào 👋 Hệ thống bột dinh dưỡng ếch</h2>
+    <button class="toggle-theme" onclick="toggleTheme()">🌙 Sáng / Tối</button>
+  </div>
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin-bottom:30px;">
+    <div class="card" style="text-align:center;">
+      <div style="font-size:32px;margin-bottom:10px;">💪</div>
+      <p style="font-size:13px;margin-bottom:8px;">Protein TB</p>
+      <h3 style="font-size:24px;color:var(--primary);">58.0%</h3>
+    </div>
+    <div class="card" style="text-align:center;">
+      <div style="font-size:32px;margin-bottom:10px;">🦴</div>
+      <p style="font-size:13px;margin-bottom:8px;">Canxi TB</p>
+      <h3 style="font-size:24px;color:var(--primary);">4343 mg</h3>
+    </div>
+    <div class="card" style="text-align:center;">
+      <div style="font-size:32px;margin-bottom:10px;">💰</div>
+      <p style="font-size:13px;margin-bottom:8px;">Giá từ</p>
+      <h3 style="font-size:24px;color:var(--primary);">50k đ</h3>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="card"><div class="icon">💪</div><h3>Protein cao</h3><p>Hỗ trợ tăng trưởng cơ bắp và phát triển thể chất.</p></div>
+    <div class="card"><div class="icon">🦴</div><h3>Canxi tự nhiên</h3><p>Tăng cường xương và răng chắc khỏe cho trẻ em.</p></div>
+    <div class="card"><div class="icon">💚</div><h3>Chế biến lành mạnh</h3><p>Không chiên dầu – Ít muối – Không phụ gia.</p></div>
+    <div class="card"><div class="icon">👶</div><h3>Đối tượng</h3><p>Trẻ ăn dặm • Gym • Người ăn kiêng</p></div>
+    <div class="card"><div class="icon">🧪</div><h3>An toàn thực phẩm</h3><p>Quy trình khép kín đảm bảo vệ sinh.</p></div>
+    <div class="card"><div class="icon">📲</div><h3>QR thông minh</h3><p>Quét mã QR để xem dinh dưỡng & hỏi chatbot.</p></div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="page" id="page-about">
+  <div class="topbar">
+    <h2>📦 Giới thiệu sản phẩm FrogNutri</h2>
+    <button class="toggle-theme" onclick="toggleTheme()">🌙 Sáng / Tối</button>
+  </div>
+  <div class="grid">
+    <div class="card"><div class="icon">🍚</div><h3>Dạng sản phẩm</h3><p>Bột dinh dưỡng • Chà bông • Snack từ thịt & xương đùi ếch.</p></div>
+    <div class="card"><div class="icon">👶</div><h3>Trẻ ăn dặm</h3><p>Giàu protein & canxi, hỗ trợ phát triển chiều cao và trí não.</p></div>
+    <div class="card"><div class="icon">💪</div><h3>Người tập gym</h3><p>Đạm cao – ít béo – phục hồi cơ nhanh.</p></div>
+    <div class="card"><div class="icon">🥗</div><h3>Người ăn kiêng</h3><p>Năng lượng thấp, không dầu chiên, tốt cho giảm cân.</p></div>
+    <div class="card"><div class="icon">⭐</div><h3>Chất lượng cao</h3><p>100% thịt ếch tươi, không phụ gia, không bảo quản.</p></div>
+    <div class="card"><div class="icon">✅</div><h3>Kiểm định</h3><p>Đã đạt chuẩn AAFCO & kiểm nghiệm phòng thí nghiệm.</p></div>
+  </div>
+</div>
+
+<!-- CALCULATOR -->
+<div class="page" id="page-calculator">
+  <div class="topbar">
+    <h2>🧮 Máy tính nhu cầu Protein</h2>
+    <button class="toggle-theme" onclick="toggleTheme()">🌙 Sáng / Tối</button>
+  </div>
+  <div class="card" style="max-width:600px;">
+    <div style="background:linear-gradient(135deg,var(--primary),#45b577);padding:30px;border-radius:16px;color:white;text-align:center;margin-bottom:30px;">
+      <h3 style="margin-bottom:10px;font-size:18px;">Thông tin nhanh về sản phẩm</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:20px;font-size:14px;">
+        <div><p style="opacity:0.9;margin-bottom:5px;">Bột đùi ếch</p><p style="font-weight:700;font-size:16px;">58.6% Protein</p></div>
+        <div><p style="opacity:0.9;margin-bottom:5px;">Bột thân ếch</p><p style="font-weight:700;font-size:16px;">57.4% Protein</p></div>
+      </div>
+    </div>
+    <h3 style="margin-bottom:20px;">Tính toán lượng Protein</h3>
+    <div style="margin-bottom:20px;">
+      <label style="display:block;font-size:14px;font-weight:500;margin-bottom:10px;">Chọn loại bột</label>
+      <select id="calc-type" style="width:100%;padding:12px;border:1px solid #ccc;border-radius:8px;" onchange="calculate()">
+        <option value="0.586">Bột đùi ếch (58.6% Protein)</option>
+        <option value="0.574">Bột thân ếch (57.4% Protein)</option>
+      </select>
+    </div>
+    <div style="margin-bottom:20px;">
+      <label style="display:block;font-size:14px;font-weight:500;margin-bottom:10px;">Khối lượng sử dụng (gram)</label>
+      <input type="number" id="calc-gram" placeholder="Ví dụ: 50" style="width:100%;padding:12px;border:1px solid #ccc;border-radius:8px;" oninput="calculate()">
+    </div>
+    <div id="res-box" style="display:none;padding:25px;background:linear-gradient(135deg,#ecfdf5,#dcfce7);border-radius:12px;text-align:center;border:2px solid var(--primary);">
+      <p style="font-size:13px;color:#166534;font-weight:600;margin-bottom:8px;">📊 LƯỢNG PROTEIN CÓ THỂ CUNG CẤP</p>
+      <h2 style="color:var(--primary);font-size:40px;margin:0;"><span id="protein-res">0</span><small style="font-size:18px;">g</small></h2>
+      <p style="font-size:13px;color:#166534;margin-top:10px;">Đủ bổ sung cho nhu cầu dinh dưỡng hàng ngày</p>
+    </div>
+  </div>
+</div>
+
+<!-- NUTRITION -->
+<div class="page" id="page-nutrition">
+  <div class="topbar">
+    <h2>🥗 Hồ sơ xét nghiệm & giá trị dinh dưỡng</h2>
+    <button class="toggle-theme" onclick="toggleTheme()">🌙 Sáng / Tối</button>
+  </div>
+  <div class="card" style="margin-bottom:25px;">
+    <span class="badge">Kiểm định an toàn thực phẩm</span>
+    <h3>Giá trị dinh dưỡng</h3>
+    <p>Tài liệu bên dưới là báo cáo kiểm nghiệm phòng thí nghiệm cho thịt ếch giúp chứng minh hàm lượng Protein – Canxi – Béo – Độ ẩm đạt chuẩn dinh dưỡng.</p>
+  </div>
+  <div class="card" style="padding:24px;margin-top:20px;border-radius:24px;background:rgba(255,255,255,.95);box-shadow:0 20px 45px rgba(0,0,0,.06);">
+    <h3 style="margin-bottom:12px;">Giá trị dinh dưỡng</h3>
+    <p style="margin:0;color:#475569;line-height:1.6;">Thông tin dinh dưỡng đã được kiểm nghiệm phòng thí nghiệm cho thịt ếch và chứng minh hàm lượng Protein – Canxi – Béo – Độ ẩm đạt tiêu chuẩn.</p>
+  </div>
+  <section class="report-section">
+    <div class="section-card">
+      <div class="section-header">
+        <div>
+          <p class="section-tag">Hồ sơ kiểm định chất lượng</p>
+          <h3>Văn bản xác nhận độc lập từ VietLabs</h3>
+          <p class="section-desc">Hai mẫu kiểm định rõ ràng, minh bạch cùng số phiếu chính thức.</p>
         </div>
+      </div>
+      <div class="report-grid">
+        <article class="report-item">
+          <div class="report-icon">🧾</div>
+          <h4>Mẫu: Bột thân ếch</h4>
+          <p>Số phiếu: VLABO-260207-026/2</p>
+          <a href="https://drive.google.com/file/d/19g03B24bf7JlVnX0uS_zvBeS_Hyh5xLr/view" target="_blank" class="report-btn">Xem chi tiết</a>
+        </article>
+        <article class="report-item">
+          <div class="report-icon">🧾</div>
+          <h4>Mẫu: Bột đùi ếch</h4>
+          <p>Số phiếu: VLABO-260207-026/1</p>
+          <a href="https://drive.google.com/file/d/1P1stGdT-GzYrYd6igw9u_55kfrZ5aCqn/view" target="_blank" class="report-btn">Xem chi tiết</a>
+        </article>
+      </div>
+    </div>
+  </section>
+</div>
 
-        <div class="input-group">
-          <input id="login-pass" type="password" placeholder="Mật khẩu" required>
-          <span class="eye" onclick="togglePassword('login-pass')">👁</span>
-        </div>
+<!-- CHATBOT -->
+<div class="page" id="page-chatbot">
+  <div class="topbar">
+    <h2>🤖 Trợ lý dinh dưỡng FrogNutri</h2>
+    <button class="toggle-theme" onclick="toggleTheme()">🌙 Sáng / Tối</button>
+  </div>
+  <div class="chat-wrap">
+    <div class="chat-box">
+      <div class="messages" id="messages">
+        <div class="msg bot">Xin chào 👋 Tôi là FrogNutri AI. Hỏi tôi về: sản phẩm, tác giả, quy trình, kiểm nghiệm, giá cả, hướng dẫn sử dụng...</div>
+      </div>
+      <div class="typing" id="typing"></div>
+      <div class="chat-hint">Bạn có thể hỏi: FrogNutri là gì, protein, canxi, quy trình sản xuất, liều lượng, giá, tác giả, đặt hàng...</div>
+      <div class="input-area">
+        <input id="chat-input" type="text" placeholder="Nhập câu hỏi...">
+        <button onclick="sendMessage()">Gửi</button>
+      </div>
+    </div>
+  </div>
+</div>
 
-        <button type="submit">Đăng nhập</button>
-        <div id="login-msg" class="msg-box"></div>
+<!-- ORDER -->
+<div class="page" id="page-order">
+  <div class="topbar">
+    <h2>🛒 Đặt mua sản phẩm</h2>
+    <button class="toggle-theme" onclick="toggleTheme()">🌙 Sáng / Tối</button>
+  </div>
+  <div class="card" style="max-width:620px;">
+    <h3 style="margin-bottom:6px;">Chọn sản phẩm</h3>
+    <p style="font-size:13px;color:#666;margin-bottom:18px;">Nhấn vào sản phẩm bạn muốn đặt mua</p>
+    <div class="order-product-grid" id="product-options">
+      <div class="product-option selected" onclick="selectProduct(this,'Bột thân ếch 100g','50.000đ')">
+        <div class="product-emoji">🐸</div>
+        <div class="product-name">Bột thân ếch 100g</div>
+        <div class="product-price">50.000đ / túi</div>
+        <div class="product-desc">Protein 57.4% • Canxi 5676mg</div>
+      </div>
+      <div class="product-option" onclick="selectProduct(this,'Bột đùi ếch 100g','75.000đ')">
+        <div class="product-emoji">🦵</div>
+        <div class="product-name">Bột đùi ếch 100g</div>
+        <div class="product-price">75.000đ / túi</div>
+        <div class="product-desc">Protein 58.6% • Cao cấp</div>
+      </div>
+    </div>
+    <div style="margin-top:24px;display:flex;flex-direction:column;gap:14px;">
+      <div>
+        <label class="order-form-label">👤 Họ và tên</label>
+        <input id="order-name" type="text" placeholder="Nguyễn Văn A" required>
+      </div>
+      <div>
+        <label class="order-form-label">📞 Số điện thoại</label>
+        <input id="order-phone" type="tel" placeholder="0901 234 567" required>
+      </div>
+      <div>
+        <label class="order-form-label">🔢 Số lượng (túi)</label>
+        <input id="order-qty" type="number" min="1" value="1" placeholder="1" required oninput="updateQtySummary()">
+      </div>
+      <div>
+        <label class="order-form-label">📍 Địa chỉ giao hàng (tuỳ chọn)</label>
+        <input id="order-address" type="text" placeholder="Số nhà, đường, phường, tỉnh/thành phố">
+      </div>
+      <div id="order-summary" style="padding:16px;background:rgba(76,175,80,.08);border-radius:12px;border:1px solid rgba(76,175,80,.25);font-size:14px;line-height:1.8;">
+        <strong>📋 Tóm tắt đơn hàng:</strong><br>
+        Sản phẩm: <span id="sum-product">Bột thân ếch 100g</span><br>
+        Đơn giá: <span id="sum-price">50.000đ</span><br>
+        Số lượng: <span id="sum-qty">1</span> túi
+      </div>
+      <button onclick="submitOrder()" style="width:100%;padding:15px;font-size:15px;border-radius:12px;">
+        📧 Gửi đơn hàng qua Gmail
+      </button>
+      <p style="font-size:12px;color:#888;text-align:center;">Sau khi nhấn, Gmail sẽ mở với đơn hàng được điền sẵn. Bạn chỉ cần bấm Gửi!</p>
+    </div>
+  </div>
+</div>
+
+<!-- PROFILE -->
+<div class="page" id="page-profile">
+  <div class="topbar">
+    <h2>👤 Thông tin tài khoản</h2>
+    <button class="toggle-theme" onclick="toggleTheme()">🌙 Sáng / Tối</button>
+  </div>
+  <div class="card profile-wrap" style="margin-bottom:25px;">
+    <div style="text-align:center;">
+      <img src="https://via.placeholder.com/170" class="avatar" alt="Avatar">
+      <form style="margin-top:15px;">
+        <input type="file" accept="image/*" onchange="previewAvatar(event)">
+        <button type="button" onclick="updateAvatar()">Đổi avatar</button>
       </form>
-
-      <div class="auth-link">
-        Chưa có tài khoản? <a onclick="showPage('register')">Đăng ký ngay</a>
-      </div>
     </div>
-  </div>
-
-  <!-- ====== REGISTER PAGE ====== -->
-  <div class="page" id="page-register">
-    <div class="auth-card">
-      <h2>🐸 FrogNutri</h2>
-      <p>Tạo tài khoản mới</p>
-
-      <form onsubmit="handleRegister(event)">
-        <div class="input-group">
-          <input id="register-name" type="text" placeholder="Họ và tên" required>
-        </div>
-
-        <div class="input-group">
-          <input id="register-email" type="email" placeholder="Email" required>
-        </div>
-
-        <div class="input-group">
-          <input id="register-pass" type="password" placeholder="Mật khẩu" required>
-          <span class="eye" onclick="togglePassword('register-pass')">👁</span>
-        </div>
-
-        <button type="submit">Đăng ký</button>
-        <div id="register-msg" class="msg-box"></div>
+    <div style="flex:1;">
+      <form onsubmit="handleUpdateProfile(event)">
+        <label>👤 Họ tên</label>
+        <input id="profile-name" type="text" value="" required>
+        <label>📧 Email</label>
+        <input id="profile-email" type="email" value="" disabled>
+        <label>🔐 Mật khẩu mới</label>
+        <input id="profile-pass" type="password" placeholder="Để trống nếu không đổi">
+        <button type="submit">💾 Lưu thay đổi</button>
       </form>
-
-      <div class="auth-link">
-        Đã có tài khoản? <a onclick="showPage('login')">Đăng nhập</a>
-      </div>
+      <div id="profile-msg" class="msg-box"></div>
     </div>
   </div>
-
-  <!-- ====== DASHBOARD PAGE ====== -->
-  <div class="page" id="page-dashboard">
-    <div class="topbar">
-      <h2>Xin chào 👋 Hệ thống bột dinh dưỡng ếch</h2>
-      <button class="toggle-theme" onclick="toggleTheme()">🌙 Sáng / Tối</button>
-    </div>
-
-    <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 30px;">
-      <div class="card" style="text-align: center;">
-        <div style="font-size: 32px; margin-bottom: 10px;">💪</div>
-        <p style="font-size: 13px; color: var(--text-light); margin-bottom: 8px;">Protein TB</p>
-        <h3 style="font-size: 24px; color: var(--primary);">58.0%</h3>
-      </div>
-      <div class="card" style="text-align: center;">
-        <div style="font-size: 32px; margin-bottom: 10px;">🦴</div>
-        <p style="font-size: 13px; color: var(--text-light); margin-bottom: 8px;">Canxi TB</p>
-        <h3 style="font-size: 24px; color: var(--primary);">4343 mg</h3>
-      </div>
-      <div class="card" style="text-align: center;">
-        <div style="font-size: 32px; margin-bottom: 10px;">💰</div>
-        <p style="font-size: 13px; color: var(--text-light); margin-bottom: 8px;">Giá thấp</p>
-        <h3 style="font-size: 24px; color: var(--primary);">22.5k đ</h3>
-      </div>
-    </div>
-
-    <div class="grid">
-      <div class="card">
-        <div class="icon">💪</div>
-        <h3>Protein cao</h3>
-        <p>Hỗ trợ tăng trưởng cơ bắp và phát triển thể chất.</p>
-      </div>
-
-      <div class="card">
-        <div class="icon">🦴</div>
-        <h3>Canxi tự nhiên</h3>
-        <p>Tăng cường xương và răng chắc khỏe cho trẻ em.</p>
-      </div>
-
-      <div class="card">
-        <div class="icon">💚</div>
-        <h3>Chế biến lành mạnh</h3>
-        <p>Không chiên dầu – Ít muối – Không phụ gia.</p>
-      </div>
-
-      <div class="card">
-        <div class="icon">👶</div>
-        <h3>Đối tượng</h3>
-        <p>Trẻ ăn dặm • Gym • Người ăn kiêng</p>
-      </div>
-
-      <div class="card">
-        <div class="icon">🧪</div>
-        <h3>An toàn thực phẩm</h3>
-        <p>Quy trình khép kín đảm bảo vệ sinh.</p>
-      </div>
-
-      <div class="card">
-        <div class="icon">📲</div>
-        <h3>QR thông minh</h3>
-        <p>Quét mã QR để xem dinh dưỡng & hỏi chatbot.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- ====== ABOUT PAGE ====== -->
-  <div class="page" id="page-about">
-    <div class="topbar">
-      <h2>📦 Giới thiệu sản phẩm FrogNutri</h2>
-      <button class="toggle-theme" onclick="toggleTheme()">🌙 Sáng / Tối</button>
-    </div>
-
-    <div class="grid">
-      <div class="card">
-        <div class="icon">🍚</div>
-        <h3>Dạng sản phẩm</h3>
-        <p>Bột dinh dưỡng • Chà bông • Snack từ thịt & xương đùi ếch.</p>
-      </div>
-
-      <div class="card">
-        <div class="icon">👶</div>
-        <h3>Trẻ ăn dặm</h3>
-        <p>Giàu protein & canxi, hỗ trợ phát triển chiều cao và trí não.</p>
-      </div>
-
-      <div class="card">
-        <div class="icon">💪</div>
-        <h3>Người tập gym</h3>
-        <p>Đạm cao – ít béo – phục hồi cơ nhanh.</p>
-      </div>
-
-      <div class="card">
-        <div class="icon">🥗</div>
-        <h3>Người ăn kiêng</h3>
-        <p>Năng lượng thấp, không dầu chiên, tốt cho giảm cân.</p>
-      </div>
-
-      <div class="card">
-        <div class="icon">⭐</div>
-        <h3>Chất lượng cao</h3>
-        <p>100% thịt ếch tươi, không phụ gia, không bảo quản.</p>
-      </div>
-
-      <div class="card">
-        <div class="icon">✅</div>
-        <h3>Kiểm định</h3>
-        <p>Đã đạt chuẩn AAFCO & kiểm nghiệm phòng thí nghiệm.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- ====== CALCULATOR PAGE ====== -->
-  <div class="page" id="page-calculator">
-    <div class="topbar">
-      <h2>🧮 Máy tính nhu cầu Protein</h2>
-      <button class="toggle-theme" onclick="toggleTheme()">🌙 Sáng / Tối</button>
-    </div>
-
-    <div class="card" style="max-width: 600px;">
-      <div style="background: linear-gradient(135deg, var(--primary), #45b577); padding: 30px; border-radius: 16px; color: white; text-align: center; margin-bottom: 30px;">
-        <h3 style="margin-bottom: 10px; font-size: 18px;">Thông tin nhanh về sản phẩm</h3>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; font-size: 14px;">
-          <div>
-            <p style="opacity: 0.9; margin-bottom: 5px;">Bột đùi ếch</p>
-            <p style="font-weight: 700; font-size: 16px;">58.6% Protein</p>
-          </div>
-          <div>
-            <p style="opacity: 0.9; margin-bottom: 5px;">Bột thân ếch</p>
-            <p style="font-weight: 700; font-size: 16px;">57.4% Protein</p>
-          </div>
-        </div>
-      </div>
-
-      <h3 style="margin-bottom: 20px;">Tính toán lượng Protein</h3>
-      
-      <div style="margin-bottom: 20px;">
-        <label style="display: block; font-size: 14px; font-weight: 500; margin-bottom: 10px; color: var(--text-light);">Chọn loại bột</label>
-        <select id="calc-type" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px;" onchange="calculate()">
-          <option value="0.586">Bột đùi ếch (58.6% Protein)</option>
-          <option value="0.574">Bột thân ếch (57.4% Protein)</option>
-        </select>
-      </div>
-
-      <div style="margin-bottom: 20px;">
-        <label style="display: block; font-size: 14px; font-weight: 500; margin-bottom: 10px; color: var(--text-light);">Khối lượng sử dụng (gram)</label>
-        <input type="number" id="calc-gram" placeholder="Ví dụ: 50" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px;" oninput="calculate()">
-      </div>
-
-      <div id="res-box" style="display: none; padding: 25px; background: linear-gradient(135deg, #ecfdf5, #dcfce7); border-radius: 12px; text-align: center; border: 2px solid var(--primary);">
-        <p style="font-size: 13px; color: #166534; font-weight: 600; margin-bottom: 8px;">📊 LƯỢNG PROTEIN CÓ THỂ CUNG CẤP</p>
-        <h2 style="color: var(--primary); font-size: 40px; margin: 0;"><span id="protein-res">0</span><small style="font-size: 18px;">g</small></h2>
-        <p style="font-size: 13px; color: #166534; margin-top: 10px;">Đủ bổ sung cho nhu cầu dinh dưỡng hàng ngày</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- ====== NUTRITION PAGE ====== -->
-  <div class="page" id="page-nutrition">
-    <div class="topbar">
-      <h2>🥗 Hồ sơ xét nghiệm & giá trị dinh dưỡng</h2>
-      <button class="toggle-theme" onclick="toggleTheme()">🌙 Sáng / Tối</button>
-    </div>
-
-    <div class="card" style="margin-bottom: 25px;">
-      <span class="badge">Kiểm định an toàn thực phẩm</span>
-      <h3>Giá trị dinh dưỡng</h3>
-      <p>Tài liệu bên dưới là báo cáo kiểm nghiệm phòng thí nghiệm cho thịt ếch giúp chứng minh hàm lượng Protein – Canxi – Béo – Độ ẩm đạt chuẩn dinh dưỡng.</p>
-    </div>
-
-    <div class="card" style="padding: 24px; margin-top: 20px; border-radius: 24px; background: rgba(255,255,255,.95); box-shadow: 0 20px 45px rgba(0,0,0,.06);">
-      <h3 style="margin-bottom: 12px;">Giá trị dinh dưỡng</h3>
-      <p style="margin:0; color:#475569; line-height:1.6;">Thông tin dinh dưỡng đã được kiểm nghiệm phòng thí nghiệm cho thịt ếch và chứng minh hàm lượng Protein – Canxi – Béo – Độ ẩm đạt tiêu chuẩn.</p>
-    </div>
-    <section class="report-section">
-      <div class="section-card">
-        <div class="section-header">
-          <div>
-            <p class="section-tag">Hồ sơ kiểm định chất lượng</p>
-            <h3>Văn bản xác nhận độc lập từ VietLabs</h3>
-            <p class="section-desc">Hai mẫu kiểm định rõ ràng, minh bạch cùng số phiếu chính thức.</p>
-          </div>
-        </div>
-
-        <div class="report-grid">
-          <article class="report-item">
-            <div class="report-icon">🧾</div>
-            <h4>Mẫu: Bột thân ếch</h4>
-            <p>Số phiếu: VLABO-260207-026/2</p>
-            <a href="https://drive.google.com/file/d/19g03B24bf7JlVnX0uS_zvBeS_Hyh5xLr/view" target="_blank" class="report-btn">Xem chi tiết</a>
-          </article>
-
-          <article class="report-item">
-            <div class="report-icon">🧾</div>
-            <h4>Mẫu: Bột đùi ếch</h4>
-            <p>Số phiếu: VLABO-260207-026/1</p>
-            <a href="https://drive.google.com/file/d/1P1stGdT-GzYrYd6igw9u_55kfrZ5aCqn/view" target="_blank" class="report-btn">Xem chi tiết</a>
-          </article>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <!-- ====== CHATBOT PAGE ====== -->
-  <div class="page" id="page-chatbot">
-    <div class="topbar">
-      <h2>🤖 Trợ lý dinh dưỡng FrogNutri</h2>
-      <button class="toggle-theme" onclick="toggleTheme()">🌙 Sáng / Tối</button>
-    </div>
-
-    <div class="chat-wrap">
-      <div class="chat-box">
-        <div class="messages" id="messages">
-          <div class="msg bot">
-            Xin chào 👋 Tôi là FrogNutri AI. Hỏi tôi về: tổ chức, tác giả, lý do chọn đề tài, quy trình, kiểm nghiệm, QR, hướng dẫn sử dụng...
-          </div>
-        </div>
-
-        <div class="typing" id="typing"></div>
-
-        <div class="chat-hint">Bạn có thể hỏi: tổ chức, tác giả, lý do chọn đề tài, quy trình sản xuất, kiểm nghiệm, QR, hướng dẫn sử dụng, muỗng định lượng...</div>
-
-        <div class="input-area">
-          <input id="chat-input" type="text" placeholder="Nhập câu hỏi...">
-          <button onclick="sendMessage()">Gửi</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ====== ORDER PAGE ====== -->
-  <div class="page" id="page-order">
-    <div class="topbar">
-      <h2>🛒 Đặt mua sản phẩm</h2>
-      <button class="toggle-theme" onclick="toggleTheme()">🌙 Sáng / Tối</button>
-    </div>
-
-    <div class="card" style="max-width: 620px;">
-      <h3 style="margin-bottom: 6px;">Chọn sản phẩm</h3>
-      <p style="font-size: 13px; color: #666; margin-bottom: 18px;">Nhấn vào sản phẩm bạn muốn đặt mua</p>
-
-      <div class="order-product-grid" id="product-options">
-        <div class="product-option selected" onclick="selectProduct(this, 'Bột thân ếch 250g', '22.500đ')">
-          <div class="product-emoji">🐸</div>
-          <div class="product-name">Bột thân ếch 250g</div>
-          <div class="product-price">22.500đ / túi</div>
-          <div class="product-desc">Protein 57.4% • Canxi 5676mg</div>
-        </div>
-        <div class="product-option" onclick="selectProduct(this, 'Bột đùi ếch 250g', '39.500đ')">
-          <div class="product-emoji">🦵</div>
-          <div class="product-name">Bột đùi ếch 250g</div>
-          <div class="product-price">39.500đ / túi</div>
-          <div class="product-desc">Protein 58.6% • Cao cấp</div>
-        </div>
-      </div>
-
-      <div style="margin-top: 24px; display: flex; flex-direction: column; gap: 14px;">
-        <div>
-          <label class="order-form-label">👤 Họ và tên</label>
-          <input id="order-name" type="text" placeholder="Nguyễn Văn A" required>
-        </div>
-
-        <div>
-          <label class="order-form-label">📞 Số điện thoại</label>
-          <input id="order-phone" type="tel" placeholder="0901 234 567" required>
-        </div>
-
-        <div>
-          <label class="order-form-label">🔢 Số lượng (túi)</label>
-          <input id="order-qty" type="number" min="1" value="1" placeholder="1" required>
-        </div>
-
-        <div>
-          <label class="order-form-label">📍 Địa chỉ giao hàng (tuỳ chọn)</label>
-          <input id="order-address" type="text" placeholder="Số nhà, đường, phường, tỉnh/thành phố">
-        </div>
-
-        <div id="order-summary" style="padding: 16px; background: rgba(76,175,80,.08); border-radius: 12px; border: 1px solid rgba(76,175,80,.25); font-size: 14px; line-height: 1.8;">
-          <strong>📋 Tóm tắt đơn hàng:</strong><br>
-          Sản phẩm: <span id="sum-product">Bột thân ếch 250g</span><br>
-          Đơn giá: <span id="sum-price">22.500đ</span><br>
-          Số lượng: <span id="sum-qty">1</span> túi
-        </div>
-
-        <button onclick="submitOrder()" style="width: 100%; padding: 15px; font-size: 15px; border-radius: 12px;">
-          📧 Gửi đơn hàng qua Gmail
-        </button>
-
-        <p style="font-size: 12px; color: #888; text-align: center;">
-          Sau khi nhấn, Gmail sẽ mở với đơn hàng được điền sẵn. Bạn chỉ cần bấm Gửi!
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <!-- ====== PROFILE PAGE ====== -->
-  <div class="page" id="page-profile">
-    <div class="topbar">
-      <h2>👤 Thông tin tài khoản</h2>
-      <button class="toggle-theme" onclick="toggleTheme()">🌙 Sáng / Tối</button>
-    </div>
-
-    <div class="card profile-wrap" style="margin-bottom: 25px;">
-      <div style="text-align: center;">
-        <img src="https://via.placeholder.com/170" class="avatar" alt="Avatar">
-        <form style="margin-top: 15px;">
-          <input type="file" accept="image/*" onchange="previewAvatar(event)">
-          <button type="button" onclick="updateAvatar()">Đổi avatar</button>
-        </form>
-      </div>
-
-      <div style="flex: 1;">
-        <form onsubmit="handleUpdateProfile(event)">
-          <label>👤 Họ tên</label>
-          <input id="profile-name" type="text" value="" required>
-
-          <label>📧 Email</label>
-          <input id="profile-email" type="email" value="" disabled>
-
-          <label>🔐 Mật khẩu mới</label>
-          <input id="profile-pass" type="password" placeholder="Để trống nếu không đổi">
-
-          <button type="submit">💾 Lưu thay đổi</button>
-        </form>
-        <div id="profile-msg" class="msg-box"></div>
-      </div>
-    </div>
-  </div>
+</div>
 
 </main>
 
 <script>
 let currentUser = null;
 let currentPage = 'login';
-let selectedProduct = { name: 'Bột thân ếch 250g', price: '22.500đ' };
+// Giá mặc định khớp với sản phẩm đầu tiên được chọn
+let selectedProduct = { name: 'Bột thân ếch 100g', price: '50.000đ' };
 
 const users = [
   { id: 1, name: 'Demo User', email: 'demo@example.com', password: '123456' }
@@ -1446,27 +540,17 @@ function showPage(page) {
   }
   document.getElementById('page-' + page).classList.add('active');
   currentPage = page;
-
   document.querySelectorAll('.sidebar a').forEach(a => a.classList.remove('active'));
-
   if (currentUser) {
     allMenuIds.forEach(id => {
       const el = document.getElementById(id);
-      if (el) {
-        el.style.display = 'flex';
-        if (id === 'menu-' + page) el.classList.add('active');
-      }
+      if (el) { el.style.display = 'flex'; if (id === 'menu-' + page) el.classList.add('active'); }
     });
   } else {
-    allMenuIds.forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.style.display = 'none';
-    });
+    allMenuIds.forEach(id => { const el = document.getElementById(id); if (el) el.style.display = 'none'; });
   }
-
   document.getElementById('hamburger').classList.remove('active');
   document.getElementById('sidebarNav').classList.remove('active');
-
   if (page === 'profile' && currentUser) {
     document.getElementById('profile-name').value = currentUser.name;
     document.getElementById('profile-email').value = currentUser.email;
@@ -1520,38 +604,20 @@ function handleRegister(e) {
   }, 1500);
 }
 
-function logout() {
-  currentUser = null;
-  showPage('login');
-}
-
-function togglePassword(id) {
-  const input = document.getElementById(id);
-  input.type = input.type === 'password' ? 'text' : 'password';
-}
-
-function toggleTheme() {
-  document.body.classList.toggle('dark');
-  localStorage.theme = document.body.classList.contains('dark') ? 'dark' : 'light';
-}
-
-if (localStorage.theme === 'dark') {
-  document.body.classList.add('dark');
-}
+function logout() { currentUser = null; showPage('login'); }
+function togglePassword(id) { const i = document.getElementById(id); i.type = i.type === 'password' ? 'text' : 'password'; }
+function toggleTheme() { document.body.classList.toggle('dark'); localStorage.theme = document.body.classList.contains('dark') ? 'dark' : 'light'; }
+if (localStorage.theme === 'dark') document.body.classList.add('dark');
 
 function calculate() {
   const rate = parseFloat(document.getElementById('calc-type').value);
   const gram = parseFloat(document.getElementById('calc-gram').value);
   const resBox = document.getElementById('res-box');
-  if (gram > 0) {
-    resBox.style.display = 'block';
-    document.getElementById('protein-res').innerText = (rate * gram).toFixed(2);
-  } else {
-    resBox.style.display = 'none';
-  }
+  if (gram > 0) { resBox.style.display = 'block'; document.getElementById('protein-res').innerText = (rate * gram).toFixed(2); }
+  else resBox.style.display = 'none';
 }
 
-/* ====== ORDER FUNCTIONS ====== */
+/* ORDER */
 function selectProduct(el, name, price) {
   document.querySelectorAll('.product-option').forEach(o => o.classList.remove('selected'));
   el.classList.add('selected');
@@ -1560,28 +626,22 @@ function selectProduct(el, name, price) {
   document.getElementById('sum-price').textContent = price;
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  const qtyInput = document.getElementById('order-qty');
-  if (qtyInput) {
-    qtyInput.addEventListener('input', () => {
-      document.getElementById('sum-qty').textContent = qtyInput.value || '1';
-    });
-  }
-});
+function updateQtySummary() {
+  const qty = document.getElementById('order-qty').value;
+  document.getElementById('sum-qty').textContent = qty || '1';
+}
 
 function submitOrder() {
   const name = document.getElementById('order-name').value.trim();
   const phone = document.getElementById('order-phone').value.trim();
   const qty = document.getElementById('order-qty').value.trim();
   const address = document.getElementById('order-address').value.trim();
-
   if (!name || !phone || !qty) {
     alert('⚠️ Vui lòng điền đầy đủ họ tên, số điện thoại và số lượng!');
     return;
   }
-
   const subject = encodeURIComponent('🛒 Đơn hàng FrogNutri - ' + name);
-  const bodyLines = [
+  const lines = [
     'ĐƠN ĐẶT HÀNG FROGNUTRI',
     '========================',
     'Họ và tên    : ' + name,
@@ -1590,127 +650,122 @@ function submitOrder() {
     'Đơn giá      : ' + selectedProduct.price,
     'Số lượng     : ' + qty + ' túi',
   ];
-  if (address) bodyLines.push('Địa chỉ      : ' + address);
-  bodyLines.push('========================');
-  bodyLines.push('Vui lòng liên hệ lại để xác nhận đơn hàng. Xin cảm ơn! 🐸');
-
-  const body = encodeURIComponent(bodyLines.join('\n'));
-
-  window.open(
-    'https://mail.google.com/mail/?view=cm&to=rubyatho08@gmail.com&su=' + subject + '&body=' + body,
-    '_blank'
-  );
+  if (address) lines.push('Địa chỉ      : ' + address);
+  lines.push('========================');
+  lines.push('Vui lòng liên hệ lại để xác nhận đơn hàng. Xin cảm ơn! 🐸');
+  const body = encodeURIComponent(lines.join('\n'));
+  window.open('https://mail.google.com/mail/?view=cm&to=rubyatho08@gmail.com&su=' + subject + '&body=' + body, '_blank');
 }
 
-/* ====== CHATBOT ====== */
+/* CHATBOT */
 const chatbotQA = [
   {
     keywords: ["frognutri là gì","giới thiệu sản phẩm","sản phẩm là gì"],
-    answer: "FrogNutri là bột dinh dưỡng được chế biến từ thân ếch bằng quy trình hấp cách thủy, sấy nhiệt độ thấp 70°C và nghiền siêu mịn. Sản phẩm tận dụng cả phần thịt và xương ếch nhằm cung cấp đồng thời protein, canxi hữu cơ và các khoáng chất tự nhiên. FrogNutri được nghiên cứu dành cho trẻ em, người cao tuổi, người tập gym, người ăn kiêng và những người cần bổ sung dinh dưỡng hằng ngày."
+    answer: "FrogNutri là bột dinh dưỡng được chế biến từ thân ếch bằng quy trình hấp cách thủy, sấy nhiệt độ thấp 70°C và nghiền siêu mịn. Sản phẩm tận dụng cả phần thịt và xương ếch nhằm cung cấp protein, canxi hữu cơ và các khoáng chất tự nhiên. Phù hợp cho trẻ em, người cao tuổi, người tập gym và người ăn kiêng."
   },
   {
-    keywords: ["điểm mới","sáng tạo","khác biệt","ưu điểm","mới","kinh tế tuần hoàn","bảo vệ hệ sinh thái","an toàn sinh học","qr","web app","ứng dụng số"],
-    answer: "Điểm mới nổi bật của FrogNutri là tận dụng thân ếch - phần thường có giá trị kinh tế thấp sau khi tách đùi xuất khẩu - để tạo ra sản phẩm dinh dưỡng giá trị cao. Sản phẩm không chỉ giàu protein mà còn chứa lượng canxi hữu cơ tự nhiên từ xương ếch. Ngoài ra FrogNutri còn tích hợp QR Code, Website và Trợ lý AI hỗ trợ người dùng tra cứu thông tin và xây dựng khẩu phần dinh dưỡng cá nhân."
+    keywords: ["điểm mới","sáng tạo","khác biệt","ưu điểm","kinh tế tuần hoàn","bảo vệ hệ sinh thái","qr","web app","ứng dụng số"],
+    answer: "Điểm mới nổi bật của FrogNutri là tận dụng thân ếch — phần thường có giá trị thấp sau khi tách đùi xuất khẩu — để tạo ra sản phẩm dinh dưỡng giá trị cao. Ngoài ra còn tích hợp QR Code, Website và Trợ lý AI hỗ trợ tra cứu thông tin và xây dựng khẩu phần dinh dưỡng cá nhân."
   },
   {
     keywords: ["vì sao chọn thân ếch","tại sao dùng thân ếch","thân ếch"],
-    answer: "Nhóm lựa chọn thân ếch vì đây là phần thường bị bán với giá thấp hoặc chưa được tận dụng hiệu quả. Trong khi đó thân ếch vẫn chứa lượng protein cao và đặc biệt có xương giàu canxi, photpho và khoáng chất. Việc sử dụng thân ếch giúp giảm lãng phí nguyên liệu, tăng giá trị kinh tế và tạo ra sản phẩm giàu dinh dưỡng với chi phí hợp lý."
+    answer: "Thân ếch thường bị bán giá thấp hoặc chưa được tận dụng hiệu quả, nhưng vẫn chứa protein cao và xương giàu canxi, photpho, khoáng chất. Sử dụng thân ếch giúp giảm lãng phí, tăng giá trị kinh tế và tạo sản phẩm giàu dinh dưỡng với chi phí hợp lý."
   },
   {
     keywords: ["protein","đạm","hàm lượng protein"],
-    answer: "Theo kết quả kiểm nghiệm, FrogNutri chứa khoảng 57,4% protein. Đây là nguồn đạm động vật có giá trị sinh học cao, dễ hấp thu và hỗ trợ phát triển cơ bắp, phục hồi cơ thể cũng như duy trì sức khỏe tổng thể."
+    answer: "Theo kết quả kiểm nghiệm, FrogNutri chứa khoảng 57,4% protein — nguồn đạm động vật có giá trị sinh học cao, dễ hấp thu, hỗ trợ phát triển cơ bắp và duy trì sức khỏe tổng thể."
   },
   {
     keywords: ["canxi","canxi bao nhiêu","hàm lượng canxi"],
-    answer: "FrogNutri chứa khoảng 4000–5676mg canxi trên mỗi 100g sản phẩm tùy từng dòng. Vì hàm lượng canxi khá cao nên chỉ nên sử dụng với lượng vừa phải: trẻ nhỏ khoảng 5g/ngày, người lớn khoảng 10g/ngày là đã bổ sung được lượng canxi đáng kể."
+    answer: "FrogNutri chứa khoảng 4000–5676mg canxi trên mỗi 100g sản phẩm tùy từng dòng. Do hàm lượng canxi khá cao, chỉ nên dùng vừa phải: trẻ nhỏ khoảng 5g/ngày, người lớn khoảng 10g/ngày là đủ."
   },
   {
     keywords: ["liều lượng","dùng bao nhiêu","ăn bao nhiêu","khuyến cáo"],
-    answer: "Khuyến nghị sử dụng: Trẻ nhỏ khoảng 5g/ngày (1 muỗng nhỏ). Người trưởng thành khoảng 10g/ngày (1 muỗng lớn). Người tập gym hoặc cần bổ sung nhiều có thể dùng 10–20g/ngày. Không nên lạm dụng vì cơ thể chỉ hấp thu một lượng dinh dưỡng nhất định trong ngày."
+    answer: "Khuyến nghị sử dụng: Trẻ nhỏ ~5g/ngày (1 muỗng nhỏ). Người trưởng thành ~10g/ngày (1 muỗng lớn). Người tập gym hoặc cần bổ sung nhiều có thể dùng 10–20g/ngày. Không nên lạm dụng vì cơ thể chỉ hấp thu một lượng dinh dưỡng nhất định mỗi ngày."
   },
   {
     keywords: ["trẻ em","ăn dặm","bé mấy tháng"],
-    answer: "Trẻ từ giai đoạn ăn dặm có thể sử dụng FrogNutri khi đã làm quen với thực phẩm giàu đạm. Nên bắt đầu với lượng nhỏ 2–3g mỗi lần để theo dõi khả năng thích nghi, sau đó tăng dần lên khoảng 5g/ngày. Sản phẩm nên được sử dụng dưới sự theo dõi của phụ huynh."
+    answer: "Trẻ từ giai đoạn ăn dặm có thể dùng FrogNutri khi đã làm quen với thực phẩm giàu đạm. Bắt đầu với 2–3g/lần để theo dõi khả năng thích nghi, sau đó tăng dần lên khoảng 5g/ngày. Nên có sự theo dõi của phụ huynh."
   },
   {
     keywords: ["người già","cao tuổi","loãng xương"],
-    answer: "Người cao tuổi rất phù hợp với FrogNutri vì sản phẩm chứa protein và canxi hữu cơ tự nhiên. Bổ sung đều đặn khoảng 10g/ngày có thể hỗ trợ dinh dưỡng xương khớp và cung cấp đạm dễ hấp thu."
+    answer: "Người cao tuổi rất phù hợp với FrogNutri nhờ protein và canxi hữu cơ tự nhiên. Bổ sung đều đặn khoảng 10g/ngày có thể hỗ trợ dinh dưỡng xương khớp và cung cấp đạm dễ hấp thu."
   },
   {
     keywords: ["gym","tăng cơ","thể hình"],
-    answer: "Đối với người tập gym, FrogNutri là nguồn protein tự nhiên giúp hỗ trợ phục hồi và phát triển cơ bắp. Có thể sử dụng 10–20g/ngày kết hợp với chế độ luyện tập và ăn uống hợp lý."
+    answer: "Đối với người tập gym, FrogNutri là nguồn protein tự nhiên hỗ trợ phục hồi và phát triển cơ bắp. Có thể dùng 10–20g/ngày kết hợp với chế độ luyện tập và ăn uống hợp lý."
   },
   {
     keywords: ["giảm cân","ăn kiêng"],
-    answer: "FrogNutri chứa protein cao và ít chất béo không có lợi. Protein giúp tạo cảm giác no lâu hơn nên sản phẩm rất phù hợp cho người ăn kiêng hoặc kiểm soát cân nặng."
+    answer: "FrogNutri chứa protein cao và ít chất béo không có lợi. Protein tạo cảm giác no lâu hơn, rất phù hợp cho người ăn kiêng hoặc kiểm soát cân nặng."
   },
   {
     keywords: ["omega 3","chất béo"],
-    answer: "Sản phẩm chứa chủ yếu chất béo không no và omega-3 tự nhiên. Quy trình sấy nhiệt độ thấp giúp hạn chế oxy hóa lipid và giữ lại giá trị dinh dưỡng của nguyên liệu."
+    answer: "Sản phẩm chứa chủ yếu chất béo không no và omega-3 tự nhiên. Quy trình sấy nhiệt độ thấp giúp hạn chế oxy hóa lipid và giữ lại giá trị dinh dưỡng."
   },
   {
     keywords: ["độ ẩm","ẩm mốc","bảo quản"],
-    answer: "Theo kết quả kiểm nghiệm, độ ẩm sản phẩm khoảng 4,57% — mức thấp giúp hạn chế vi sinh vật và kéo dài thời gian bảo quản. Sau khi mở túi nên đóng kín và bảo quản nơi khô ráo hoặc ngăn mát tủ lạnh."
+    answer: "Độ ẩm sản phẩm khoảng 4,57% — mức thấp giúp hạn chế vi sinh vật và kéo dài bảo quản. Sau khi mở túi nên đóng kín và bảo quản nơi khô ráo hoặc ngăn mát tủ lạnh."
   },
   {
     keywords: ["hạn sử dụng"],
-    answer: "Khi bảo quản trong ngăn mát tủ lạnh, sản phẩm có thể duy trì chất lượng tốt trong khoảng 6 tháng. Sau khi mở túi nên sử dụng sớm và đóng kín miệng túi."
+    answer: "Khi bảo quản trong ngăn mát tủ lạnh, sản phẩm duy trì chất lượng tốt khoảng 6 tháng. Sau khi mở túi nên sử dụng sớm và đóng kín miệng túi."
   },
   {
     keywords: ["khử mùi","mùi tanh","gừng","sả","quế"],
-    answer: "Để giảm mùi tanh tự nhiên, nhóm sử dụng sả, gừng và vỏ quế trong quá trình hấp. Đây là nguyên liệu tự nhiên tạo mùi thơm dễ chịu mà không cần hương liệu hóa học."
+    answer: "Để giảm mùi tanh tự nhiên, nhóm dùng sả, gừng và vỏ quế trong quá trình hấp — nguyên liệu tự nhiên tạo mùi thơm dễ chịu mà không cần hương liệu hóa học."
   },
   {
     keywords: ["quy trình","sản xuất","làm như thế nào","chế biến","hấp cách thủy","sấy","nghiền","phối trộn"],
-    answer: "Quy trình sản xuất gồm 8 bước: Sơ chế nguyên liệu → Hấp với sả, gừng, quế → Xay nhuyễn → Sấy ở 70°C → Nghiền siêu mịn → Rây lọc → Đóng gói → Bảo quản. Quy trình này giúp giữ dinh dưỡng và hạn chế thất thoát khoáng chất."
+    answer: "Quy trình sản xuất gồm 8 bước: Sơ chế nguyên liệu → Hấp với sả, gừng, quế → Xay nhuyễn → Sấy ở 70°C → Nghiền siêu mịn → Rây lọc → Đóng gói → Bảo quản. Giúp giữ dinh dưỡng và hạn chế thất thoát khoáng chất."
   },
   {
     keywords: ["an toàn","kiểm nghiệm","chứng nhận"],
-    answer: "Nguồn nguyên liệu được lấy từ cơ sở nuôi ếch có hồ sơ đảm bảo an toàn thực phẩm. Sản phẩm đã được kiểm nghiệm các chỉ tiêu như độ ẩm, protein, chất béo và canxi tại phòng thí nghiệm độc lập VietLabs."
+    answer: "Nguyên liệu từ cơ sở nuôi ếch có hồ sơ an toàn thực phẩm. Sản phẩm đã được kiểm nghiệm độ ẩm, protein, chất béo và canxi tại phòng thí nghiệm độc lập VietLabs."
   },
   {
     keywords: ["bột cóc","so sánh bột cóc"],
-    answer: "Bột cóc có protein cao nhưng tiềm ẩn nguy cơ ngộ độc nếu chế biến không đúng kỹ thuật. FrogNutri dùng ếch nuôi an toàn hơn, dễ kiểm soát nguồn gốc và không ảnh hưởng đến cân bằng sinh thái tự nhiên."
+    answer: "Bột cóc có protein cao nhưng tiềm ẩn nguy cơ ngộ độc nếu chế biến sai kỹ thuật. FrogNutri dùng ếch nuôi an toàn hơn, dễ kiểm soát nguồn gốc và không ảnh hưởng đến cân bằng sinh thái."
   },
   {
     keywords: ["giá","bao nhiêu tiền","mua sản phẩm","bao nhiêu","tiền","chi phí"],
-    answer: "Giá bán hiện tại: Bột thân ếch FrogNutri 50.000đ/túi 100g. Bột đùi ếch FrogNutri 75.000đ/túi 100g. Bạn có thể đặt hàng trực tiếp qua mục 🛒 Mua sản phẩm trên thanh menu nhé!"
+    answer: "Giá bán hiện tại: Bột thân ếch FrogNutri 50.000đ/túi 100g. Bột đùi ếch FrogNutri 75.000đ/túi 100g. Bạn có thể đặt hàng qua mục 🛒 Mua sản phẩm trên thanh menu nhé!"
   },
   {
     keywords: ["website","web","trang web"],
-    answer: "Website FrogNutri hỗ trợ giới thiệu sản phẩm, tra cứu hồ sơ kiểm nghiệm, tính toán dinh dưỡng, xem hướng dẫn sử dụng và trò chuyện cùng trợ lý AI để được tư vấn nhanh chóng."
+    answer: "Website FrogNutri hỗ trợ giới thiệu sản phẩm, tra cứu hồ sơ kiểm nghiệm, tính toán dinh dưỡng, hướng dẫn sử dụng và trò chuyện cùng trợ lý AI."
   },
   {
     keywords: ["qr","mã qr"],
-    answer: "Mỗi sản phẩm đều có mã QR giúp người dùng truy cập nhanh vào website FrogNutri để xem nguồn gốc, kết quả kiểm nghiệm, giá trị dinh dưỡng và hướng dẫn sử dụng chi tiết."
+    answer: "Mỗi sản phẩm có mã QR giúp truy cập nhanh vào website FrogNutri để xem nguồn gốc, kết quả kiểm nghiệm, giá trị dinh dưỡng và hướng dẫn sử dụng."
   },
   {
     keywords: ["khảo sát","người dùng đánh giá"],
-    answer: "Trong khảo sát thử nghiệm, 92,3% người dùng đánh giá sản phẩm thơm hoặc rất thơm và 69,2% cho rằng sản phẩm tiện lợi, dễ sử dụng trong bữa ăn hằng ngày."
+    answer: "Trong khảo sát thử nghiệm, 92,3% người dùng đánh giá sản phẩm thơm hoặc rất thơm và 69,2% cho rằng sản phẩm tiện lợi, dễ sử dụng hằng ngày."
   },
   {
-    keywords: ["tổ chức","cơ quan chủ quản","ủy ban nhân dân","đơn vị thực hiện","lĩnh vực","thời gian hoàn thành"],
-    answer: "Dự án do Ủy ban nhân dân Phường Tân Ngãi, tỉnh Vĩnh Long chỉ đạo, thực hiện bởi Trường THCS Nguyễn Đình Chiểu. Lĩnh vực dự thi là giải pháp ứng phó biến đổi khí hậu, bảo vệ môi trường và phát triển kinh tế."
+    keywords: ["tổ chức","cơ quan chủ quản","ủy ban nhân dân","đơn vị thực hiện","lĩnh vực"],
+    answer: "Dự án do Ủy ban nhân dân Phường Tân Ngãi, tỉnh Vĩnh Long chỉ đạo, thực hiện bởi Trường THCS Nguyễn Đình Chiểu. Lĩnh vực dự thi: giải pháp ứng phó biến đổi khí hậu, bảo vệ môi trường và phát triển kinh tế."
   },
   {
     keywords: ["tác giả","nhóm thực hiện","ai","nhóm","thực hiện","giáo viên hướng dẫn"],
-    answer: "Đề tài được thực hiện bởi nhóm học sinh lớp 9/1 gồm Nguyễn Anh Thơ (40%), Hà Hoàng Thiện (40%) và Võ Huỳnh Uyên Nhi (20%) dưới sự hướng dẫn của Thầy Đỗ Hữu Thịnh."
+    answer: "Đề tài thực hiện bởi nhóm học sinh lớp 9/1 gồm Nguyễn Anh Thơ (40%), Hà Hoàng Thiện (40%) và Võ Huỳnh Uyên Nhi (20%) dưới sự hướng dẫn của Thầy Đỗ Hữu Thịnh."
   },
   {
     keywords: ["lý do","chọn đề tài","cấp thiết","suy dinh dưỡng","còi xương","nông thôn","thực phẩm phụ phẩm"],
-    answer: "FrogNutri giải quyết thiếu hụt đạm cao và canxi hữu cơ ở nông thôn, tận dụng thân ếch phụ phẩm giá rẻ tránh lãng phí. Đồng thời sản phẩm thay thế bột cóc độc hại, bảo vệ đa dạng sinh học và an toàn cho trẻ em."
+    answer: "FrogNutri giải quyết thiếu hụt đạm và canxi hữu cơ ở nông thôn, tận dụng thân ếch phụ phẩm giá rẻ tránh lãng phí. Đồng thời thay thế bột cóc độc hại, bảo vệ đa dạng sinh học và an toàn cho trẻ em."
   },
   {
     keywords: ["hướng dẫn","sử dụng","cách dùng","ăn sao","dùng như thế nào","muỗng","định lượng","trộn"],
-    answer: "Bột FrogNutri dùng trộn vào cháo, súp, bột ăn dặm, cơm, mì, salad hoặc dùng trực tiếp như snack. Trong mỗi túi tặng kèm muỗng nhỏ 5g cho trẻ em và muỗng lớn 10g cho người lớn, giúp đong chính xác mà không cần cân."
+    answer: "Bột FrogNutri dùng trộn vào cháo, súp, bột ăn dặm, cơm, mì, salad hoặc dùng trực tiếp như snack. Mỗi túi tặng kèm muỗng nhỏ 5g cho trẻ em và muỗng lớn 10g cho người lớn."
   },
   {
-    keywords: ["tài liệu tham khảo","chiến lược quốc gia","bộ y tế","y học","studocu","an toàn vệ sinh"],
+    keywords: ["tài liệu tham khảo","chiến lược quốc gia","bộ y tế","y học","an toàn vệ sinh"],
     answer: "Tài liệu tham khảo gồm Quyết định 02/QĐ-TTg về dinh dưỡng 2021–2030, Thông tư 11/VBHN-BYT về an toàn thực phẩm bổ sung, và nghiên cứu dinh dưỡng lâm sàng về vai trò protein & canxi cho hệ cơ xương khớp trẻ em."
   },
   {
     keywords: ["mua","đặt hàng","order"],
-    answer: "Bạn có thể đặt hàng trực tiếp qua mục 🛒 Mua sản phẩm trên thanh menu. Điền thông tin và nhấn nút Gửi để gửi đơn hàng qua Gmail nhé!"
+    answer: "Bạn có thể đặt hàng trực tiếp qua mục 🛒 Mua sản phẩm trên thanh menu. Điền thông tin và nhấn Gửi để gửi đơn hàng qua Gmail nhé!"
   }
 ];
 
@@ -1718,11 +773,11 @@ function getChatbotReply(q) {
   const lower = q.toLowerCase().trim();
   if (!lower) return "Bạn có thể hỏi về giá, dinh dưỡng, quy trình, đối tượng hoặc tài liệu tham khảo của FrogNutri nhé!";
   for (let item of chatbotQA) {
-    for (let keyword of item.keywords) {
-      if (lower.includes(keyword)) return item.answer;
+    for (let kw of item.keywords) {
+      if (lower.includes(kw)) return item.answer;
     }
   }
-  return "Tôi chưa có thông tin chi tiết cho câu hỏi này. Hãy thử hỏi về 'tổ chức', 'lý do chọn đề tài', 'quy trình', 'kiểm nghiệm', 'QR', 'hướng dẫn sử dụng' hoặc 'tài liệu tham khảo'.";
+  return "Tôi chưa có thông tin cho câu hỏi này. Hãy thử hỏi về 'sản phẩm', 'giá', 'quy trình', 'kiểm nghiệm', 'liều lượng', 'tác giả' hoặc 'đặt hàng'.";
 }
 
 function sendMessage() {
@@ -1748,9 +803,7 @@ function sendMessage() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('chat-input').addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') sendMessage();
-  });
+  document.getElementById('chat-input').addEventListener('keydown', e => { if (e.key === 'Enter') sendMessage(); });
 });
 
 function handleUpdateProfile(e) {
@@ -1768,24 +821,12 @@ function handleUpdateProfile(e) {
 
 function previewAvatar(e) {
   const file = e.target.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = (event) => { document.querySelector('.avatar').src = event.target.result; };
-    reader.readAsDataURL(file);
-  }
+  if (file) { const r = new FileReader(); r.onload = ev => { document.querySelector('.avatar').src = ev.target.result; }; r.readAsDataURL(file); }
 }
 
-function updateAvatar() {
-  alert('Avatar đã được cập nhật!');
-}
+function updateAvatar() { alert('Avatar đã được cập nhật!'); }
 
-document.addEventListener('keydown', (e) => {
-  if (e.ctrlKey && e.key === 'k') {
-    e.preventDefault();
-    toggleTheme();
-  }
-});
+document.addEventListener('keydown', e => { if (e.ctrlKey && e.key === 'k') { e.preventDefault(); toggleTheme(); } });
 </script>
-
 </body>
 </html>
