@@ -178,7 +178,7 @@ body {
   }
 
   .sidebar-nav.active {
-    max-height: 360px;
+    max-height: 420px;
   }
 
   .sidebar a {
@@ -643,6 +643,65 @@ th {
   transform: translateY(-1px);
 }
 
+/* ====== ORDER PAGE ====== */
+.order-product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+  margin-bottom: 5px;
+}
+
+.product-option {
+  border: 2px solid #ccc;
+  border-radius: 14px;
+  padding: 18px;
+  cursor: pointer;
+  transition: all .2s;
+  background: var(--card);
+  text-align: center;
+}
+
+.product-option:hover {
+  border-color: var(--primary);
+  transform: translateY(-3px);
+}
+
+.product-option.selected {
+  border-color: var(--primary);
+  background: rgba(76,175,80,.08);
+}
+
+.product-option .product-emoji {
+  font-size: 36px;
+  margin-bottom: 8px;
+}
+
+.product-option .product-name {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.product-option .product-price {
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.product-option .product-desc {
+  font-size: 12px;
+  color: #666;
+  margin-top: 4px;
+}
+
+.order-form-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: var(--text);
+}
+
 /* ====== MOBILE OPTIMIZATION ====== */
 @media (max-width: 480px) {
   body {
@@ -702,7 +761,7 @@ th {
   }
 
   .sidebar-nav.active {
-    max-height: 400px;
+    max-height: 460px;
   }
 
   .sidebar a {
@@ -904,6 +963,10 @@ th {
   #res-box p {
     font-size: 12px;
   }
+
+  .order-product-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ====== TABLET OPTIMIZATION ====== */
@@ -970,6 +1033,7 @@ th {
     <a onclick="showPage('calculator')" id="menu-calculator" style="display:none">🧮 Tính toán</a>
     <a onclick="showPage('nutrition')" id="menu-nutrition" style="display:none">🥗 Dinh dưỡng</a>
     <a onclick="showPage('chatbot')" id="menu-chatbot" style="display:none">🤖 Chatbot</a>
+    <a onclick="showPage('order')" id="menu-order" style="display:none">🛒 Mua sản phẩm</a>
     <a onclick="showPage('profile')" id="menu-profile" style="display:none">👤 Hồ sơ</a>
     <a onclick="logout()" id="menu-logout" class="logout" style="display:none">🚪 Đăng xuất</a>
   </div>
@@ -1055,7 +1119,7 @@ th {
       <div class="card" style="text-align: center;">
         <div style="font-size: 32px; margin-bottom: 10px;">💰</div>
         <p style="font-size: 13px; color: var(--text-light); margin-bottom: 8px;">Giá thấp</p>
-        <h3 style="font-size: 24px; color: var(--primary);">22.5k đ</h3>
+        <h3 style="font-size: 24px; color: var(--primary);">50k đ</h3>
       </div>
     </div>
 
@@ -1262,6 +1326,71 @@ th {
     </div>
   </div>
 
+  <!-- ====== ORDER PAGE ====== -->
+  <div class="page" id="page-order">
+    <div class="topbar">
+      <h2>🛒 Đặt mua sản phẩm</h2>
+      <button class="toggle-theme" onclick="toggleTheme()">🌙 Sáng / Tối</button>
+    </div>
+
+    <div class="card" style="max-width: 620px;">
+      <h3 style="margin-bottom: 6px;">Chọn sản phẩm</h3>
+      <p style="font-size: 13px; color: #666; margin-bottom: 18px;">Nhấn vào sản phẩm bạn muốn đặt mua</p>
+
+      <div class="order-product-grid" id="product-options">
+        <div class="product-option selected" onclick="selectProduct(this, 'Bột thân ếch 100g', '50.000đ')">
+          <div class="product-emoji">🐸</div>
+          <div class="product-name">Bột thân ếch 100g</div>
+          <div class="product-price">50.000đ / túi</div>
+          <div class="product-desc">Protein 57.4% • Canxi 5676mg</div>
+        </div>
+        <div class="product-option" onclick="selectProduct(this, 'Bột đùi ếch 500g', '39.500đ')">
+          <div class="product-emoji">🦵</div>
+          <div class="product-name">Bột đùi ếch 500g</div>
+          <div class="product-price">75.000đ / túi</div>
+          <div class="product-desc">Protein 58.6% • Cao cấp</div>
+        </div>
+      </div>
+
+      <div style="margin-top: 24px; display: flex; flex-direction: column; gap: 14px;">
+        <div>
+          <label class="order-form-label">👤 Họ và tên</label>
+          <input id="order-name" type="text" placeholder="Nguyễn Văn A" required>
+        </div>
+
+        <div>
+          <label class="order-form-label">📞 Số điện thoại</label>
+          <input id="order-phone" type="tel" placeholder="0901 234 567" required>
+        </div>
+
+        <div>
+          <label class="order-form-label">🔢 Số lượng (túi)</label>
+          <input id="order-qty" type="number" min="1" value="1" placeholder="1" required>
+        </div>
+
+        <div>
+          <label class="order-form-label">📍 Địa chỉ giao hàng (tuỳ chọn)</label>
+          <input id="order-address" type="text" placeholder="Số nhà, đường, phường, tỉnh/thành phố">
+        </div>
+
+        <div id="order-summary" style="padding: 16px; background: rgba(76,175,80,.08); border-radius: 12px; border: 1px solid rgba(76,175,80,.25); font-size: 14px; line-height: 1.8;">
+          <strong>📋 Tóm tắt đơn hàng:</strong><br>
+          Sản phẩm: <span id="sum-product">Bột thân ếch 250g</span><br>
+          Đơn giá: <span id="sum-price">22.500đ</span><br>
+          Số lượng: <span id="sum-qty">1</span> túi
+        </div>
+
+        <button onclick="submitOrder()" style="width: 100%; padding: 15px; font-size: 15px; border-radius: 12px;">
+          📧 Gửi đơn hàng qua Gmail
+        </button>
+
+        <p style="font-size: 12px; color: #888; text-align: center;">
+          Sau khi nhấn, Gmail sẽ mở với đơn hàng được điền sẵn. Bạn chỉ cần bấm Gửi!
+        </p>
+      </div>
+    </div>
+  </div>
+
   <!-- ====== PROFILE PAGE ====== -->
   <div class="page" id="page-profile">
     <div class="topbar">
@@ -1301,39 +1430,37 @@ th {
 <script>
 let currentUser = null;
 let currentPage = 'login';
+let selectedProduct = { name: 'Bột thân ếch 250g', price: '22.500đ' };
+
 const users = [
   { id: 1, name: 'Demo User', email: 'demo@example.com', password: '123456' }
 ];
 
+const allMenuIds = ['menu-dashboard','menu-about','menu-calculator','menu-nutrition','menu-chatbot','menu-order','menu-profile','menu-logout'];
+
 function showPage(page) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  if (['dashboard', 'about', 'calculator', 'nutrition', 'chatbot', 'profile'].includes(page) && !currentUser) {
+  if (['dashboard','about','calculator','nutrition','chatbot','order','profile'].includes(page) && !currentUser) {
     showPage('login');
     return;
   }
   document.getElementById('page-' + page).classList.add('active');
   currentPage = page;
+
   document.querySelectorAll('.sidebar a').forEach(a => a.classList.remove('active'));
-  const menuItems = {
-    'menu-dashboard': ['dashboard', 'about', 'calculator', 'nutrition', 'chatbot', 'profile', 'logout'],
-    'menu-about': ['dashboard', 'about', 'calculator', 'nutrition', 'chatbot', 'profile', 'logout'],
-    'menu-calculator': ['dashboard', 'about', 'calculator', 'nutrition', 'chatbot', 'profile', 'logout'],
-    'menu-nutrition': ['dashboard', 'about', 'calculator', 'nutrition', 'chatbot', 'profile', 'logout'],
-    'menu-chatbot': ['dashboard', 'about', 'calculator', 'nutrition', 'chatbot', 'profile', 'logout'],
-    'menu-profile': ['dashboard', 'about', 'calculator', 'nutrition', 'chatbot', 'profile', 'logout'],
-    'menu-logout': ['dashboard', 'about', 'calculator', 'nutrition', 'chatbot', 'profile', 'logout']
-  };
 
   if (currentUser) {
-    Object.keys(menuItems).forEach(id => {
-      if (id === 'menu-' + page) {
-        document.getElementById(id)?.classList.add('active');
+    allMenuIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.style.display = 'flex';
+        if (id === 'menu-' + page) el.classList.add('active');
       }
-      document.getElementById(id).style.display = 'flex';
     });
   } else {
-    Object.keys(menuItems).forEach(id => {
-      document.getElementById(id).style.display = 'none';
+    allMenuIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.style.display = 'none';
     });
   }
 
@@ -1347,10 +1474,8 @@ function showPage(page) {
 }
 
 function toggleMenu() {
-  const hamburger = document.getElementById('hamburger');
-  const sidebarNav = document.getElementById('sidebarNav');
-  hamburger.classList.toggle('active');
-  sidebarNav.classList.toggle('active');
+  document.getElementById('hamburger').classList.toggle('active');
+  document.getElementById('sidebarNav').classList.toggle('active');
 }
 
 function handleLogin(e) {
@@ -1384,12 +1509,7 @@ function handleRegister(e) {
     document.getElementById('register-msg').textContent = '❌ Email đã tồn tại!';
     return;
   }
-  users.push({
-    id: users.length + 1,
-    name,
-    email,
-    password
-  });
+  users.push({ id: users.length + 1, name, email, password });
   document.getElementById('register-msg').className = 'msg-box success';
   document.getElementById('register-msg').textContent = '✅ Đăng ký thành công! Chuyển sang đăng nhập...';
   setTimeout(() => {
@@ -1431,6 +1551,58 @@ function calculate() {
   }
 }
 
+/* ====== ORDER FUNCTIONS ====== */
+function selectProduct(el, name, price) {
+  document.querySelectorAll('.product-option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedProduct = { name, price };
+  document.getElementById('sum-product').textContent = name;
+  document.getElementById('sum-price').textContent = price;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const qtyInput = document.getElementById('order-qty');
+  if (qtyInput) {
+    qtyInput.addEventListener('input', () => {
+      document.getElementById('sum-qty').textContent = qtyInput.value || '1';
+    });
+  }
+});
+
+function submitOrder() {
+  const name = document.getElementById('order-name').value.trim();
+  const phone = document.getElementById('order-phone').value.trim();
+  const qty = document.getElementById('order-qty').value.trim();
+  const address = document.getElementById('order-address').value.trim();
+
+  if (!name || !phone || !qty) {
+    alert('⚠️ Vui lòng điền đầy đủ họ tên, số điện thoại và số lượng!');
+    return;
+  }
+
+  const subject = encodeURIComponent('🛒 Đơn hàng FrogNutri - ' + name);
+  const bodyLines = [
+    'ĐƠN ĐẶT HÀNG FROGNUTRI',
+    '========================',
+    'Họ và tên    : ' + name,
+    'Số điện thoại: ' + phone,
+    'Sản phẩm     : ' + selectedProduct.name,
+    'Đơn giá      : ' + selectedProduct.price,
+    'Số lượng     : ' + qty + ' túi',
+  ];
+  if (address) bodyLines.push('Địa chỉ      : ' + address);
+  bodyLines.push('========================');
+  bodyLines.push('Vui lòng liên hệ lại để xác nhận đơn hàng. Xin cảm ơn! 🐸');
+
+  const body = encodeURIComponent(bodyLines.join('\n'));
+
+  window.open(
+    'https://mail.google.com/mail/?view=cm&to=rubyatho08@gmail.com&su=' + subject + '&body=' + body,
+    '_blank'
+  );
+}
+
+/* ====== CHATBOT ====== */
 const chatbotQA = [
   {
     keywords: ["tổ chức", "cơ quan chủ quản", "ủy ban nhân dân", "đơn vị thực hiện", "tác giả", "giáo viên hướng dẫn", "lĩnh vực", "thời gian hoàn thành"],
@@ -1475,6 +1647,10 @@ const chatbotQA = [
   {
     keywords: ["cách dùng", "ăn sao", "dùng như thế nào"],
     answer: "Có thể trộn vào cháo, cơm, mì, súp, salad hoặc dùng trực tiếp như snack."
+  },
+  {
+    keywords: ["mua", "đặt hàng", "order", "mua sản phẩm"],
+    answer: "Bạn có thể đặt hàng trực tiếp qua mục 🛒 Mua sản phẩm trên thanh menu. Điền thông tin và nhấn nút Gửi để gửi đơn hàng cho chúng mình qua Gmail nhé!"
   }
 ];
 
@@ -1483,9 +1659,7 @@ function getChatbotReply(q) {
   if (!lower) return "Bạn có thể hỏi về giá, dinh dưỡng, quy trình, đối tượng hoặc tài liệu tham khảo của FrogNutri nhé!";
   for (let item of chatbotQA) {
     for (let keyword of item.keywords) {
-      if (lower.includes(keyword)) {
-        return item.answer;
-      }
+      if (lower.includes(keyword)) return item.answer;
     }
   }
   return "Tôi chưa có thông tin chi tiết cho câu hỏi này. Hãy thử hỏi về 'tổ chức', 'lý do chọn đề tài', 'quy trình', 'kiểm nghiệm', 'QR', 'hướng dẫn sử dụng' hoặc 'tài liệu tham khảo'.";
@@ -1528,9 +1702,7 @@ function handleUpdateProfile(e) {
     if (password) currentUser.password = password;
     document.getElementById('profile-msg').className = 'msg-box success';
     document.getElementById('profile-msg').textContent = '✅ Đã lưu thành công';
-    setTimeout(() => {
-      document.getElementById('profile-msg').textContent = '';
-    }, 2000);
+    setTimeout(() => { document.getElementById('profile-msg').textContent = ''; }, 2000);
   }
 }
 
@@ -1538,9 +1710,7 @@ function previewAvatar(e) {
   const file = e.target.files[0];
   if (file) {
     const reader = new FileReader();
-    reader.onload = (event) => {
-      document.querySelector('.avatar').src = event.target.result;
-    };
+    reader.onload = (event) => { document.querySelector('.avatar').src = event.target.result; };
     reader.readAsDataURL(file);
   }
 }
